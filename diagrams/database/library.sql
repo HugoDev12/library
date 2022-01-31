@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 31 jan. 2022 à 17:19
+-- Généré le : lun. 31 jan. 2022 à 17:28
 -- Version du serveur : 10.4.21-MariaDB
 -- Version de PHP : 8.0.11
 
@@ -31,7 +31,7 @@ CREATE TABLE `books` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `author` text NOT NULL,
-  `date` datetime NOT NULL,
+  `date` date NOT NULL,
   `description` varchar(3000) DEFAULT NULL,
   `publisher` varchar(255) NOT NULL,
   `category` text NOT NULL,
@@ -48,9 +48,9 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `title`, `author`, `date`, `description`, `publisher`, `category`, `status`, `last_user`, `loan_date`, `due_date`, `image_name`, `image_file`) VALUES
-(1, 'Santé parfaite', 'Dr Deepak Chopra', '2022-01-01 17:15:39', 'Comment avoir une santé parfaite !', 'J\'ai lu', 'Santé', 0, 1, NULL, NULL, NULL, NULL),
-(2, 'Santé parfaite v2', 'Dr Deepak Chopra', '2022-01-03 17:15:57', 'Comment avoir une santé parfaite !', 'J\'ai lu', 'Santé', 0, 1, NULL, NULL, NULL, NULL),
-(3, 'Santé parfaite v3', 'Dr Deepak Chopra', '2022-01-06 17:16:08', 'Comment avoir une santé parfaite !', 'J\'ai lu', 'Santé', 0, 1, NULL, NULL, NULL, NULL);
+(1, 'Santé parfaite', 'Dr Deepak Chopra', '2022-01-01', 'Comment avoir une santé parfaite !', 'J\'ai lu', 'Santé', 0, 1, NULL, NULL, NULL, NULL),
+(2, 'Santé parfaite v2', 'Dr Deepak Chopra', '2022-01-03', 'Comment avoir une santé parfaite !', 'J\'ai lu', 'Santé', 0, 1, NULL, NULL, NULL, NULL),
+(3, 'Santé parfaite v3', 'Dr Deepak Chopra', '2022-01-06', 'Comment avoir une santé parfaite !', 'J\'ai lu', 'Santé', 0, 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

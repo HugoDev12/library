@@ -16,13 +16,11 @@ class HomePageController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $books = $entityManager->getRepository(Books::class)->findAll();
-        // dump($books);
 
 
         return $this->render('home_page/index.html.twig', [
-            // dump($books),
             'controller_name' => 'HomePageController',
-            // 'books' => $books,
+            'books' => $books,
         ]);
     }
 
