@@ -89,5 +89,66 @@ class HomePageController extends AbstractController
         ]);
     }
 
+<<<<<<< HEAD
+=======
+    #[Route('/edit/{id}', name: 'book_edit')]
+    public function edit(ManagerRegistry $doctrine, int $id, Request $request): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Books::class)->find($id);
+
+        $form = $this->createFormBuilder($book)
+        ->add('title', TextType::class, ["attr" => ["class" => "form-control"]])
+        ->add('author', TextType::class, ["attr" => ["class" => "form-control"]])
+        ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
+        ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
+        ->add('category', TextType::class, ["attr" => ["class" => "form-control"]])
+        ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
+        ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Le livre a bien été modifié');
+            $edit = $form->getData();
+            $book->setTitle($edit->getTitle());
+            $book->setAuthor($edit->getAuthor());
+            $book->setDescription($edit->getDescription());
+            $book->setPublisher($edit->getPublisher());
+            $book->setCategory($edit->getCategory());
+            $book->setStatus($edit->getStatus());
+            $book->setLoanDate($edit->getLoanDate());
+            $book->setDueDate($edit->getDueDate());
+            $book->setImageName($edit->getImageName());
+            $book->setImageFile($edit->getImageFile());
+            $book->setLastUser($edit->getLastUser());
+
+
+
+            $entityManager->persist($book);
+            $entityManager->flush();
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->renderForm('home_page/edit.html.twig', [
+            'form' => $form,
+            'id' => $id,
+            'status' => $book->getStatus()
+        ]);
+    }
+
+
+    #[Route('/delete/{id}', name: 'delete')]
+    public function delete(Int $id, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $book = $em->getRepository(Books::class)->find($id);
+        $em->remove($book);
+        $em->flush();
+        $this->addFlash('success', 'Le livre a bien été supprimé');
+
+        return $this->redirectToRoute('home');
+    }
+
+>>>>>>> d5c9650a4a5346d583b4ee6cc9d6236021cc97a3
 
 }
