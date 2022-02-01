@@ -130,9 +130,9 @@ class Books
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(array $author): self
     {
-        $this->author = $author;
+        $this->author = implode(",",$author);
 
         return $this;
     }
@@ -178,9 +178,9 @@ class Books
         return $this->category;
     }
 
-    public function setCategory(string $category): self
+    public function setCategory(array $category): self
     {
-        $this->category = $category;
+        $this->category = implode(",",$category);
 
         return $this;
     }
