@@ -74,7 +74,11 @@ sortDescending: ": activer pour trier la colonne par ordre décroissant"
 				    <img class="w-25" src='/todolist/avatar/{{app.user.getImageName()}}'> <br>
 				    {% endif %}
 				    {% endif %} #}
-
+<ul>
+	{% for book2 in datas %}
+	<li>{{book2.title}}</li>
+	{% endfor %}
+</ul>
 
 	<div class="example-wrapper">
 

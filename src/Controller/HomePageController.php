@@ -12,7 +12,9 @@ use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use Symfony\Component\Validator\Constraints\File;
+// use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class HomePageController extends AbstractController
 {
@@ -22,10 +24,14 @@ class HomePageController extends AbstractController
         $entityManager = $doctrine->getManager();
         $books = $entityManager->getRepository(Books::class)->findAll();
 
+        $datas = file_get_contents("../books.json");
+        $books2 = json_decode($datas);
+
 
         return $this->render('home_page/index.html.twig', [
             'controller_name' => 'HomePageController',
             'books' => $books,
+            'datas' => $books2
         ]);
     }
 
@@ -53,6 +59,7 @@ class HomePageController extends AbstractController
             ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
             ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('category', TextType::class, ["attr" => ["class" => "form-control"]])
+            ->add('cover', FileType::class, ["mapped" => false, "required" => false, "constraints" => [new File(['maxSize' => '2048k', 'mimeTypes' => ['image/png', 'image/jpeg'], 'mimeTypeMessage' => 'Veuillez choisir une image au format jpeg ou png',])],])
             ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
             ->getForm();
 
