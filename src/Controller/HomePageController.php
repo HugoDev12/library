@@ -29,6 +29,19 @@ class HomePageController extends AbstractController
         ]);
     }
 
+    // #[Route('/delete', name: 'delete')]
+    // public function delete(Int $id, ManagerRegistry $doctrine): Response
+    // {
+    //     $em = $doctrine->getManager();
+    //     $book = $em->getRepository(Books::class)->find($id);
+    //     $em->remove($book);
+    //     $em->flush();
+    //     $this->addFlash('success', 'Le livre a bien été supprimé');
+
+    //     return $this->redirectToRoute('home');
+    // }
+
+
     #[Route('/create', name: 'book_create')]
     public function create(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -75,4 +88,6 @@ class HomePageController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
 }
