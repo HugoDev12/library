@@ -12,9 +12,9 @@ use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Validator\Constraints\File;
-// use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\User;
+
 
 class HomePageController extends AbstractController
 {
@@ -90,24 +90,41 @@ class HomePageController extends AbstractController
         $book = $entityManager->getRepository(Books::class)->find($id);
 
         $form = $this->createFormBuilder($book)
-        ->add('title', TextType::class, ["attr" => ["class" => "form-control"]])
-        ->add('author', TextType::class, ["attr" => ["class" => "form-control"]])
-        ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
-        ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
-        ->add('category', TextType::class, ["attr" => ["class" => "form-control"]])
-        ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
-        ->getForm();
+            ->add('title', TextType::class, ["attr" => ["class" => "form-control"]])
+            ->add('author', TextType::class, ["attr" => ["class" => "form-control"]])
+            ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
+            ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
+            ->add('category', TextType::class, ["attr" => ["class" => "form-control"]])
+            // ->add('last_user', EntityType::class, ["class"=>User::class, "attr" => ["class" => "form-control"]])
+
+            ->add('last_user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'id',
+                'attr' => ['class' => 'form-control'],
+                'label' => 'Utilisateur',
+                'placeholder' => 'Aucun'
+            ])
+
+
+            ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
+            ->getForm();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Le livre a bien été modifié');
             $edit = $form->getData();
+
+            if (is_null($edit->getLastUser())) {
+                $book->setStatus(1);
+            } else {
+                $book->setStatus(0);
+            }
+
             $book->setTitle($edit->getTitle());
             $book->setAuthor($edit->getAuthor());
             $book->setDescription($edit->getDescription());
             $book->setPublisher($edit->getPublisher());
             $book->setCategory($edit->getCategory());
-            $book->setStatus($edit->getStatus());
             $book->setLoanDate($edit->getLoanDate());
             $book->setDueDate($edit->getDueDate());
             $book->setImageName($edit->getImageName());
@@ -142,5 +159,22 @@ class HomePageController extends AbstractController
     }
 
 
+    #[Route('/return/{id}', name: 'book_return')]
+    public function return(ManagerRegistry $doctrine, int $id, Request $request): Response
+
+    {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Books::class)->find($id);
+
+        $book->setLastUser(null);
+        $book->setStatus(1);
+
+
+        $entityManager->persist($book);
+        $entityManager->flush();
+        return $this->redirectToRoute('home');
+
+
+    }
 }
 
