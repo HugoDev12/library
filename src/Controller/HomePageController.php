@@ -24,23 +24,23 @@ class HomePageController extends AbstractController
         $entityManager = $doctrine->getManager();
         $books = $entityManager->getRepository(Books::class)->findAll();
 
-
         return $this->render('home_page/index.html.twig', [
             'controller_name' => 'HomePageController',
             'books' => $books,
         ]);
     }
 
+
     #[Route('/create', name: 'book_create')]
     public function create(Request $request, ManagerRegistry $doctrine): Response
     {
         $book = new Books();
         $book->setTitle("Titre du Livre");
-        $book->setAuthor("Nom de l'auteur");
+        $book->setAuthor(["Nom de l'auteur"]);
         // $book->setDate(new DateTime("now"));
         $book->setDescription("Résumé");
         $book->setPublisher("Maison d'édition");
-        $book->setCategory("Catégorie");
+        $book->setCategory(["Catégorie"]);
         $book->setStatus(false);
         $book->setLoanDate(null);
         $book->setDueDate(null);
@@ -54,6 +54,7 @@ class HomePageController extends AbstractController
             ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
             ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('category', TextType::class, ["attr" => ["class" => "form-control"]])
+            // ->add('cover', FileType::class, ["mapped" => false, "required" => false, "constraints" => [new File(['maxSize' => '2048k', 'mimeTypes' => ['image/png', 'image/jpeg'], 'mimeTypeMessage' => 'Veuillez choisir une image au format jpeg ou png',])],])
             ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
             ->getForm();
 
@@ -77,7 +78,6 @@ class HomePageController extends AbstractController
             'form' => $form,
         ]);
     }
-
     #[Route('/edit/{id}', name: 'book_edit')]
     public function edit(ManagerRegistry $doctrine, int $id, Request $request): Response
     {
@@ -170,3 +170,4 @@ class HomePageController extends AbstractController
         return $this->redirectToRoute('home');
     }
 }
+
