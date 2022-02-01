@@ -21,6 +21,7 @@
         "symfony/runtime": "6.0.*",
         "symfony/security-bundle": "6.0.*",
         "symfony/twig-bundle": "6.0.*",
+        "symfony/validator": "6.0.*",
         "symfony/yaml": "6.0.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -77,6 +78,8 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.36"
+        "symfony/maker-bundle": "^1.36",
+        "symfony/stopwatch": "6.0.*",
+        "symfony/web-profiler-bundle": "6.0.*"
     }
 }
