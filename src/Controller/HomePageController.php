@@ -155,7 +155,7 @@ class HomePageController extends AbstractController
 
 
     #[Route('/return/{id}', name: 'book_return')]
-    public function return(ManagerRegistry $doctrine, int $id, Request $request): Response
+    public function return(ManagerRegistry $doctrine, int $id): Response
 
     {
         $entityManager = $doctrine->getManager();
@@ -168,7 +168,5 @@ class HomePageController extends AbstractController
         $entityManager->persist($book);
         $entityManager->flush();
         return $this->redirectToRoute('home');
-
-
     }
 }
