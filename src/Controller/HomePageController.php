@@ -75,7 +75,6 @@ class HomePageController extends AbstractController
             'form' => $form,
         ]);
     }
-
     #[Route('/edit/{id}', name: 'book_edit')]
     public function edit(ManagerRegistry $doctrine, int $id, Request $request): Response
     {
@@ -133,6 +132,4 @@ class HomePageController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
-
-
 }
