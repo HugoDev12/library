@@ -5,8 +5,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">Accueil</a>
-      <a class="nav-item nav-link" href="#">Utilisateurs</a>
+      <a class="nav-item nav-link" href="/library/public/">Accueil</a>
+      <a class="nav-item nav-link" href="/library/public/user">Utilisateurs</a>
       
     </div>
   </div>

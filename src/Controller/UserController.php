@@ -17,10 +17,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'user')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
+        $entityManager = $doctrine->getManager();
+        $users = $entityManager->getRepository(User::class)->findAll();
+
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
+            'users' => $users
         ]);
     }
 
@@ -64,4 +68,57 @@ class UserController extends AbstractController
         ]);
 
 	}
+
+    #[Route('user/edit/{id}', name: 'user_edit')]
+    public function edit(ManagerRegistry $doctrine, int $id, Request $request): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+        $form = $this->createFormBuilder($user)
+        ->add('email', EmailType::class, ["attr" => ["class" => "form-control"]])
+        ->add('first_name', TextType::class, ["attr" => ["class" => "form-control"]])
+        ->add('last_name', TextType::class, ["attr" => ["class" => "form-control"]])
+        ->add('phone_number', TextType::class, ["attr" => ["class" => "form-control"]])
+        ->add('address', TextType::class, ["attr" => ["class" => "form-control"]])
+        ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
+        ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', "L'utilisateur a bien été modifié");
+            $edit = $form->getData();
+            $user->setEmail($edit->getEmail());
+            $user->setFirstName($edit->getFirstName());
+            $user->setLastName($edit->getLastName());
+            $user->setPhoneNumber($edit->getPhoneNumber());
+            $user->setAddress($edit->getAddress());
+
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('user');
+        }
+
+        return $this->renderForm('user/edit.html.twig', [
+            'form' => $form,
+            'id' => $id
+        ]);
+    }
+
+
+    #[Route('user/delete/{id}', name: 'delete')]
+    public function delete(Int $id, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        $em->remove($user);
+        $em->flush();
+        $this->addFlash('success', "L'utilisateur' a bien été supprimé");
+
+        return $this->redirectToRoute('user');
+    }
+
+
+
 }
