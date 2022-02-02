@@ -16,8 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
 use App\Entity\History;
-
-
+use PhpParser\Node\Expr\Cast\Object_;
 
 class HomePageController extends AbstractController
 {
@@ -44,7 +43,7 @@ class HomePageController extends AbstractController
         $book->setDescription("Résumé");
         $book->setPublisher("Maison d'édition");
         $book->setCategory("Catégorie");
-        $book->setStatus(false);
+        $book->setStatus(true);
         $book->setLoanDate(null);
         $book->setDueDate(null);
         $book->setImageName(null);
@@ -76,7 +75,6 @@ class HomePageController extends AbstractController
             $datas = $form->getData();
             $datas->setDate(new \DateTime("now"));
 
-
             $em = $doctrine->getManager();
             $em->persist($datas);
             $em->flush();
@@ -98,7 +96,7 @@ class HomePageController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Books::class)->find($id);
-       
+
 
 
 
@@ -133,9 +131,10 @@ class HomePageController extends AbstractController
             } else {
                 $book->setStatus(0);
                 $userId = $edit->getLastUser();
-                $user = $entityManager->getRepository(User::class)->findBy($userId);
-                $history = $entityManager->getRepository(History::class)->findAll();
-                $history = new History();
+                $user = $entityManager->getRepository(User::class)->find($userId);
+                // $history = $entityManager->getRepository(History::class)->findAll();
+
+                $history = new History;
                 $history->setUser($user);
                 $history->setBook($book);
             }
@@ -151,9 +150,12 @@ class HomePageController extends AbstractController
             $book->setImageFile($edit->getImageFile());
             $book->setLastUser($edit->getLastUser());
 
+      
 
 
             $entityManager->persist($book);
+            $entityManager->flush();
+            $entityManager->persist($history);
             $entityManager->flush();
             return $this->redirectToRoute('home');
         }
@@ -171,8 +173,12 @@ class HomePageController extends AbstractController
     {
         $em = $doctrine->getManager();
         $book = $em->getRepository(Books::class)->find($id);
+        $history = $em->getRepository(History::class)->findOneBy(["book"=>$id]);
+        $book->removeBookHistory($history);
         $em->remove($book);
         $em->flush();
+
+
         $this->addFlash('success', 'Le livre a bien été supprimé');
 
         return $this->redirectToRoute('home');
@@ -195,4 +201,3 @@ class HomePageController extends AbstractController
         return $this->redirectToRoute('home');
     }
 }
-

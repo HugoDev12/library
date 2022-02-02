@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\History;
+
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -112,11 +115,35 @@ class UserController extends AbstractController
     {
         $em = $doctrine->getManager();
         $user = $em->getRepository(User::class)->find($id);
+        $history = $em->getRepository(History::class)->findOneBy(["user"=>$id]);
+        $user->removeUserHistory($history);
         $em->remove($user);
-        $em->flush();
+
+        try {
+            $em->flush();
+        } catch (Exception $e) {
+            $e = "L'utilisateur n'a pas rendu tous ses livres, vous ne pouvez pas le supprimer !";
+            $this->addFlash('danger', $e);
+            return $this->redirectToRoute('user');
+        }
+
         $this->addFlash('success', "L'utilisateur' a bien été supprimé");
 
         return $this->redirectToRoute('user');
+    }
+
+
+
+    #[Route('user/detail/{id}', name: 'user_detail')]
+    public function viewDetail(Int $id, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        return $this->render('user/detail.html.twig', [
+            'controller_name' => 'UserController',
+            'user' => $user,
+            'id' => $id,
+        ]);
     }
 
 
