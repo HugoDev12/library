@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Books;
-use App\Entity\History;
 use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -16,7 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
-
+use App\Entity\History;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class HomePageController extends AbstractController
 {
@@ -74,7 +74,6 @@ class HomePageController extends AbstractController
 
             $datas = $form->getData();
             $datas->setDate(new \DateTime("now"));
-
 
             $em = $doctrine->getManager();
             $em->persist($datas);
@@ -174,8 +173,12 @@ class HomePageController extends AbstractController
     {
         $em = $doctrine->getManager();
         $book = $em->getRepository(Books::class)->find($id);
+        $history = $em->getRepository(History::class)->findOneBy(["book"=>$id]);
+        $book->removeBookHistory($history);
         $em->remove($book);
         $em->flush();
+
+
         $this->addFlash('success', 'Le livre a bien été supprimé');
 
         return $this->redirectToRoute('home');

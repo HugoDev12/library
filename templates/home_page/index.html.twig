@@ -76,6 +76,12 @@ Les Livres
 {% endif %}
 {% endif %} #}
 
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+	{{ message }}
+</div>
+{% endfor %}
+
 <div class="example-wrapper">
 
 	<h1>
