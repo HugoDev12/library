@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\History;
+
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -117,6 +119,20 @@ class UserController extends AbstractController
         $this->addFlash('success', "L'utilisateur' a bien été supprimé");
 
         return $this->redirectToRoute('user');
+    }
+
+
+
+    #[Route('user/detail/{id}', name: 'user_detail')]
+    public function viewDetail(Int $id, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        return $this->render('user/detail.html.twig', [
+            'controller_name' => 'UserController',
+            'user' => $user,
+            'id' => $id,
+        ]);
     }
 
 
