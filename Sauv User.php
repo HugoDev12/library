@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -74,16 +72,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
-
-    /**
-     * @ORM\OneToMany(targetEntity=History::class, mappedBy="user")
-     */
-    private $user_history;
-
-    public function __construct()
-    {
-        $this->user_history = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -199,36 +187,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAddress(?string $address): self
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|History[]
-     */
-    public function getUserHistory(): Collection
-    {
-        return $this->user_history;
-    }
-
-    public function addUserHistory(History $userHistory): self
-    {
-        if (!$this->user_history->contains($userHistory)) {
-            $this->user_history[] = $userHistory;
-            $userHistory->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserHistory(History $userHistory): self
-    {
-        if ($this->user_history->removeElement($userHistory)) {
-            // set the owning side to null (unless already changed)
-            if ($userHistory->getUser() === $this) {
-                $userHistory->setUser(null);
-            }
-        }
 
         return $this;
     }

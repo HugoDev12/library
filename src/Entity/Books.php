@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -107,6 +109,16 @@ class Books
      * })
      */
     private $lastUser;
+
+    /**
+     * @ORM\OneToMany(targetEntity=History::class, mappedBy="book")
+     */
+    private $book_history;
+
+    public function __construct()
+    {
+        $this->book_history = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -253,6 +265,36 @@ class Books
     public function setLastUser(?User $lastUser): self
     {
         $this->lastUser = $lastUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|History[]
+     */
+    public function getBookHistory(): Collection
+    {
+        return $this->book_history;
+    }
+
+    public function addBookHistory(History $bookHistory): self
+    {
+        if (!$this->book_history->contains($bookHistory)) {
+            $this->book_history[] = $bookHistory;
+            $bookHistory->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBookHistory(History $bookHistory): self
+    {
+        if ($this->book_history->removeElement($bookHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($bookHistory->getBook() === $this) {
+                $bookHistory->setBook(null);
+            }
+        }
 
         return $this;
     }

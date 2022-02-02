@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Books;
 use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -51,6 +52,15 @@ class HomePageController extends AbstractController
         $form = $this->createFormBuilder($book)
             ->add('title', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('author', TextType::class, ["attr" => ["class" => "form-control"]])
+            ->add('author', CollectionType::class, [
+                // each entry in the array will be an "email" field
+                // 'entry_type' => EmailType::class,
+                // these options are passed to each "email" type
+                'entry_options' => [
+                    'attr' => ['class' => 'form-control'],
+                ],
+            ])
+
             ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
             ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('category', TextType::class, ["attr" => ["class" => "form-control"]])
@@ -78,11 +88,17 @@ class HomePageController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+
     #[Route('/edit/{id}', name: 'book_edit')]
     public function edit(ManagerRegistry $doctrine, int $id, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Books::class)->find($id);
+       
+
+
 
         $form = $this->createFormBuilder($book)
             ->add('title', TextType::class, ["attr" => ["class" => "form-control"]])
@@ -97,7 +113,8 @@ class HomePageController extends AbstractController
                 'choice_label' => 'id',
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Utilisateur',
-                'placeholder' => 'Aucun'
+                'placeholder' => 'Aucun',
+                'required' => false
             ])
 
 
@@ -108,14 +125,12 @@ class HomePageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Le livre a bien été modifié');
             $edit = $form->getData();
+            $userId = $edit->getLastUser();
 
             if (is_null($edit->getLastUser())) {
                 $book->setStatus(1);
             } else {
                 $book->setStatus(0);
-                $userId = $edit->getLastUser();
-                $user = $entityManager->getRepository(User::class)->find($userId);
-                
             }
 
             $book->setTitle($edit->getTitle());
@@ -158,7 +173,7 @@ class HomePageController extends AbstractController
 
 
     #[Route('/return/{id}', name: 'book_return')]
-    public function return(ManagerRegistry $doctrine, int $id, Request $request): Response
+    public function return(ManagerRegistry $doctrine, int $id): Response
 
     {
         $entityManager = $doctrine->getManager();
@@ -171,8 +186,6 @@ class HomePageController extends AbstractController
         $entityManager->persist($book);
         $entityManager->flush();
         return $this->redirectToRoute('home');
-
-
     }
 }
 
