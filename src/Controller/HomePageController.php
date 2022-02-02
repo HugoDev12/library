@@ -15,6 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
+use App\Entity\History;
+
 
 
 class HomePageController extends AbstractController
@@ -52,14 +54,14 @@ class HomePageController extends AbstractController
         $form = $this->createFormBuilder($book)
             ->add('title', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('author', TextType::class, ["attr" => ["class" => "form-control"]])
-            ->add('author', CollectionType::class, [
-                // each entry in the array will be an "email" field
-                // 'entry_type' => EmailType::class,
-                // these options are passed to each "email" type
-                'entry_options' => [
-                    'attr' => ['class' => 'form-control'],
-                ],
-            ])
+            // ->add('author', CollectionType::class, [
+            //     // each entry in the array will be an "email" field
+            //     // 'entry_type' => EmailType::class,
+            //     // these options are passed to each "email" type
+            //     'entry_options' => [
+            //         'attr' => ['class' => 'form-control'],
+            //     ],
+            // ])
 
             ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
             ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
@@ -125,12 +127,17 @@ class HomePageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Le livre a bien été modifié');
             $edit = $form->getData();
-            $userId = $edit->getLastUser();
 
             if (is_null($edit->getLastUser())) {
                 $book->setStatus(1);
             } else {
                 $book->setStatus(0);
+                $userId = $edit->getLastUser();
+                $user = $entityManager->getRepository(User::class)->findBy($userId);
+                $history = $entityManager->getRepository(History::class)->findAll();
+                $history = new History();
+                $history->setUser($user);
+                $history->setBook($book);
             }
 
             $book->setTitle($edit->getTitle());
