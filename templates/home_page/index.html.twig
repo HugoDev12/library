@@ -44,7 +44,7 @@ Les Livres
 {% endblock %}
 
 {% block body %}
-{# {% for message in app.flashes('success') %}
+{% for message in app.flashes('success') %}
 <div class="alert alert-success">
 	{{ message }}
 </div>
@@ -116,7 +116,7 @@ Les Livres
 			<tr>
 				{% for book in books %}
 				<th scope="row">
-					<!-- {{ book.getImageName() }} à changer -->
+			<img src="{{ book.getImageName() }}"></img>
 				</th>
 				<td>
 					{{ book.getTitle() }}
@@ -143,7 +143,7 @@ Les Livres
 
 				<td>
 					<a href="edit/{{ book.getId() }}" class="btn btn-warning">
-						Détail
+						Modifier
 					</a>
 				</td>
 
