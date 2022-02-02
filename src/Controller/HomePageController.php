@@ -36,11 +36,11 @@ class HomePageController extends AbstractController
     {
         $book = new Books();
         $book->setTitle("Titre du Livre");
-        $book->setAuthor(["Nom de l'auteur"]);
+        $book->setAuthor("Nom de l'auteur");
         // $book->setDate(new DateTime("now"));
         $book->setDescription("Résumé");
         $book->setPublisher("Maison d'édition");
-        $book->setCategory(["Catégorie"]);
+        $book->setCategory("Catégorie");
         $book->setStatus(false);
         $book->setLoanDate(null);
         $book->setDueDate(null);
@@ -113,6 +113,9 @@ class HomePageController extends AbstractController
                 $book->setStatus(1);
             } else {
                 $book->setStatus(0);
+                $userId = $edit->getLastUser();
+                $user = $entityManager->getRepository(User::class)->find($userId);
+                
             }
 
             $book->setTitle($edit->getTitle());
@@ -141,7 +144,7 @@ class HomePageController extends AbstractController
     }
 
 
-    #[Route('/delete/{id}', name: 'delete')]
+    #[Route('/delete/{id}', name: 'delete_book')]
     public function delete(Int $id, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
