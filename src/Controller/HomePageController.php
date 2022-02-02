@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Books;
+use App\Entity\History;
 use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -37,12 +38,12 @@ class HomePageController extends AbstractController
     {
         $book = new Books();
         $book->setTitle("Titre du Livre");
-        $book->setAuthor(["Nom de l'auteur"]);
+        $book->setAuthor("Nom de l'auteur");
         // $book->setDate(new DateTime("now"));
         $book->setDescription("Résumé");
         $book->setPublisher("Maison d'édition");
-        $book->setCategory(["Catégorie"]);
-        $book->setStatus(false);
+        $book->setCategory("Catégorie");
+        $book->setStatus(true);
         $book->setLoanDate(null);
         $book->setDueDate(null);
         $book->setImageName(null);
@@ -52,14 +53,14 @@ class HomePageController extends AbstractController
         $form = $this->createFormBuilder($book)
             ->add('title', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('author', TextType::class, ["attr" => ["class" => "form-control"]])
-            ->add('author', CollectionType::class, [
-                // each entry in the array will be an "email" field
-                // 'entry_type' => EmailType::class,
-                // these options are passed to each "email" type
-                'entry_options' => [
-                    'attr' => ['class' => 'form-control'],
-                ],
-            ])
+            // ->add('author', CollectionType::class, [
+            //     // each entry in the array will be an "email" field
+            //     // 'entry_type' => EmailType::class,
+            //     // these options are passed to each "email" type
+            //     'entry_options' => [
+            //         'attr' => ['class' => 'form-control'],
+            //     ],
+            // ])
 
             ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
             ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
@@ -96,7 +97,7 @@ class HomePageController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Books::class)->find($id);
-       
+
 
 
 
@@ -125,7 +126,6 @@ class HomePageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Le livre a bien été modifié');
             $edit = $form->getData();
-            $userId = $edit->getLastUser();
 
             if (is_null($edit->getLastUser())) {
                 $book->setStatus(1);
@@ -133,8 +133,11 @@ class HomePageController extends AbstractController
                 $book->setStatus(0);
                 $userId = $edit->getLastUser();
                 $user = $entityManager->getRepository(User::class)->find($userId);
-                $user->setBookHistory([$book->getTitle()]);
+                // $history = $entityManager->getRepository(History::class)->findAll();
 
+                $history = new History;
+                $history->setUser($user);
+                $history->setBook($book);
             }
 
             $book->setTitle($edit->getTitle());
@@ -148,9 +151,12 @@ class HomePageController extends AbstractController
             $book->setImageFile($edit->getImageFile());
             $book->setLastUser($edit->getLastUser());
 
+      
 
 
-            $entityManager->persist($book, $user);
+            $entityManager->persist($book);
+            $entityManager->flush();
+            $entityManager->persist($history);
             $entityManager->flush();
             return $this->redirectToRoute('home');
         }
@@ -192,4 +198,3 @@ class HomePageController extends AbstractController
         return $this->redirectToRoute('home');
     }
 }
-
