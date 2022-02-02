@@ -23,8 +23,8 @@
 
 		{{ form(form) }}
 
-			{% if status == 0 %}
-				<a href="../delete/{{id}}" class="btn btn-danger">
+			{% if status == 1 %}
+				<a href="{{path('delete_book',{id})}}" class="btn btn-danger">
 					Supprimer le livre
 				</a>
 			{% endif %}

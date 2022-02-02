@@ -107,7 +107,7 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('user/delete/{id}', name: 'delete')]
+    #[Route('user/delete/{id}', name: 'user_delete')]
     public function delete(Int $id, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
