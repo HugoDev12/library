@@ -8,6 +8,7 @@ use App\Entity\History;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -114,8 +115,17 @@ class UserController extends AbstractController
     {
         $em = $doctrine->getManager();
         $user = $em->getRepository(User::class)->find($id);
-        $em->remove($user);
-        $em->flush();
+        $history = $em->getRepository(History::class)->findOneBy(["user"=>$id]);
+
+        if(!is_null($history)){
+            $user->removeUserHistory($history);
+            $em->flush();
+            $em->remove($user);
+            $em->flush();
+        } else {
+            $em->remove($user);
+            $em->flush();
+        }
         $this->addFlash('success', "L'utilisateur' a bien été supprimé");
 
         return $this->redirectToRoute('user');
@@ -128,6 +138,8 @@ class UserController extends AbstractController
     {
         $em = $doctrine->getManager();
         $user = $em->getRepository(User::class)->find($id);
+
+        
         return $this->render('user/detail.html.twig', [
             'controller_name' => 'UserController',
             'user' => $user,
