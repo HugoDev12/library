@@ -7,6 +7,16 @@
 
 {% block stylesheets %}
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+	<style>
+		.example-wrapper {
+			max-width: 500px;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 {% endblock %}
 
 {% block javascripts %}
@@ -54,7 +64,7 @@ sortDescending: ": activer pour trier la colonne par ordre décroissant"
 						                {{ message }}
 						            </div>
 						        {% endfor %} #}
-	<style>
+	<!-- <style>
 		.example-wrapper {
 			margin: 1em auto;
 			max-width: 800px;
@@ -65,7 +75,7 @@ sortDescending: ": activer pour trier la colonne par ordre décroissant"
 			background: #F5F5F5;
 			padding: 2px 6px;
 		}
-	</style>
+	</style> -->
 
 	{# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 						    <p>Email : {{ app.user.email }}</p>
@@ -81,8 +91,10 @@ sortDescending: ": activer pour trier la colonne par ordre décroissant"
 	</div>
 	{% endfor %}
 
+	{{ parent() }}
 
-	<div class="example-wrapper">
+
+	<div class="example-wrapper d-flex">
 
 		<h1>
 			Les utilisateurs

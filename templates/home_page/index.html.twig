@@ -43,6 +43,7 @@ Les Livres
 {% endblock %}
 
 {% block body %}
+{{ parent() }}
 {% for message in app.flashes('success') %}
 <div class="alert alert-success">
 	{{ message }}
@@ -138,6 +139,8 @@ Les Livres
 				<td>
 					{% if (book.getlastUser() != null) %}
 					{{ book.getLastUser().getLastName() }}
+					{% else %}
+					Aucun
 					{% endif %}
 				</td>
 
@@ -162,16 +165,12 @@ Les Livres
 
 				</td>
 
-				{# <td>
-					<a href="delete/{{ book.getId() }}" class="btn btn-danger">
-						Supprimer
-					</a>
-				</td> #}
-
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 
+</div>
+</main>
 </div>
 {% endblock %}
