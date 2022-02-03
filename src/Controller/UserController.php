@@ -116,17 +116,16 @@ class UserController extends AbstractController
         $em = $doctrine->getManager();
         $user = $em->getRepository(User::class)->find($id);
         $history = $em->getRepository(History::class)->findOneBy(["user"=>$id]);
-        $user->removeUserHistory($history);
-        $em->remove($user);
 
-        try {
+        if(!is_null($history)){
+            $user->removeUserHistory($history);
             $em->flush();
-        } catch (Exception $e) {
-            $e = "L'utilisateur n'a pas rendu tous ses livres, vous ne pouvez pas le supprimer !";
-            $this->addFlash('danger', $e);
-            return $this->redirectToRoute('user');
+            $em->remove($user);
+            $em->flush();
+        } else {
+            $em->remove($user);
+            $em->flush();
         }
-
         $this->addFlash('success', "L'utilisateur' a bien été supprimé");
 
         return $this->redirectToRoute('user');
@@ -139,6 +138,8 @@ class UserController extends AbstractController
     {
         $em = $doctrine->getManager();
         $user = $em->getRepository(User::class)->find($id);
+
+        
         return $this->render('user/detail.html.twig', [
             'controller_name' => 'UserController',
             'user' => $user,
