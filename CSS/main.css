@@ -1,3 +1,16 @@
-h1 {
-    background-color: red;
+
+#logo {
+    width: 18rem;
+}
+
+#kids {
+    width: 10rem;
+}
+
+#bookImg {
+    width: 10rem;
+}
+
+.orange {
+    background-color: #feb546;
 }
