@@ -17,6 +17,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
 use App\Entity\History;
 use PhpParser\Node\Expr\Cast\Object_;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class HomePageController extends AbstractController
 {
@@ -34,7 +38,7 @@ class HomePageController extends AbstractController
 
 
     #[Route('/create', name: 'book_create')]
-    public function create(Request $request, ManagerRegistry $doctrine): Response
+    public function create(Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
         $book = new Books();
         $book->setTitle("Titre du Livre");
@@ -65,18 +69,47 @@ class HomePageController extends AbstractController
             ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
             ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('category', TextType::class, ["attr" => ["class" => "form-control"]])
-            // ->add('cover', FileType::class, ["mapped" => false, "required" => false, "constraints" => [new File(['maxSize' => '2048k', 'mimeTypes' => ['image/png', 'image/jpeg'], 'mimeTypeMessage' => 'Veuillez choisir une image au format jpeg ou png',])],])
+            ->add('cover', FileType::class, [
+                "mapped" => false,
+                "required" => false,
+                "constraints" => [new File([
+                    'maxSize' => '1024k',
+                    'mimeTypes' => ['image/png', 'image/jpeg'],
+                    'mimeTypesMessage' => 'Veuillez choisir une image au format jpeg ou png',])],])
             ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
             ->getForm();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $book = $form->getData();
+            $bookCover = $form->get('cover')->getData();
 
-            $datas = $form->getData();
-            $datas->setDate(new \DateTime("now"));
+            if ($bookCover) {
+                $originalFilename = pathinfo($bookCover->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = '/library/book_cover/'.$safeFilename.'-'.uniqid().'.'.$bookCover->guessExtension();
+    
+                // Move the file to the directory where brochures are stored
+                try {
+                    $bookCover->move(
+                        $this->getParameter('book_cover_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+    
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $book->setImageName($newFilename);
+            }
+
+            // $book = $form->getData();
+            $book->setDate(new \DateTime("now"));
 
             $em = $doctrine->getManager();
-            $em->persist($datas);
+            $em->persist($book);
             $em->flush();
             $this->addFlash('success', 'Votre livre a bien été ajouté');
 
