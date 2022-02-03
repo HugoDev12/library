@@ -200,4 +200,18 @@ class HomePageController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('home');
     }
+
+
+    #[Route('/detail/{id}', name: 'book_detail')]
+    public function viewBookDetail(Int $id, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $book = $em->getRepository(Books::class)->find($id);
+        return $this->render('home_page/detail.html.twig', [
+            'book' => $book,
+            'id' => $id,
+        ]);
+    }
+
+
 }
