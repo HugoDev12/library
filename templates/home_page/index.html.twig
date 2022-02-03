@@ -13,7 +13,6 @@ Les Livres
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-
 	$(document).ready(function () {
 		$('#books').DataTable({
 			language: {
@@ -44,12 +43,12 @@ Les Livres
 {% endblock %}
 
 {% block body %}
-{# {% for message in app.flashes('success') %}
+{% for message in app.flashes('success') %}
 <div class="alert alert-success">
 	{{ message }}
 </div>
 {% endfor %}
-{% for message in app.flashes('danger') %}
+{# {% for message in app.flashes('danger') %}
 <div class="alert alert-danger">
 	{{ message }}
 </div>
@@ -61,7 +60,6 @@ Les Livres
 		width: 95%;
 		font: 18px / 1.5 sans-serif;
 	}
-
 	.example-wrapper code {
 		background: #F5F5F5;
 		padding: 2px 6px;
@@ -75,6 +73,12 @@ Les Livres
 <img class="w-25" src='/todolist/avatar/{{app.user.getImageName()}}'> <br>
 {% endif %}
 {% endif %} #}
+
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+	{{ message }}
+</div>
+{% endfor %}
 
 <div class="example-wrapper">
 
@@ -116,7 +120,7 @@ Les Livres
 			<tr>
 				{% for book in books %}
 				<th scope="row">
-					<!-- {{ book.getImageName() }} à changer -->
+				<img src="{{ book.getImageName() }}"></img>
 				</th>
 				<td>
 					{{ book.getTitle() }}
@@ -142,10 +146,12 @@ Les Livres
 				</td>
 
 				<td>
-					<a href="edit/{{ book.getId() }}" class="btn btn-warning">
+					<a href="detail/{{ book.getId() }}" class="btn btn-warning">
 						Détail
 					</a>
 				</td>
+
+				
 
 				<td>
 					{% if (book.getlastUser() != null) %}

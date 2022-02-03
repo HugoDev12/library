@@ -75,6 +75,12 @@ sortDescending: ": activer pour trier la colonne par ordre décroissant"
 						    {% endif %}
 						    {% endif %} #}
 
+	{% for message in app.flashes('danger') %}
+	<div class="alert alert-danger">
+		{{ message }}
+	</div>
+	{% endfor %}
+
 
 	<div class="example-wrapper">
 
@@ -130,8 +136,8 @@ sortDescending: ": activer pour trier la colonne par ordre décroissant"
 						</td>
 
 						<td>
-							<a href="user/edit/{{ user.getId() }}" class="btn btn-warning">
-								Editer
+							<a href="user/detail/{{ user.getId() }}" class="btn btn-warning">
+								Detail
 							</a>
 						</td>
 
