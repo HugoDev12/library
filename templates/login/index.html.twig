@@ -49,7 +49,7 @@
 				<div class="col form-control form-control-lg border-yellow p-5 my-5 text-align-center" style="border-radius: 3em">
 					<div class="mt-2 pb-3">
 						<label for="username"> Votre email</label>
-						<input class="form-control form-control-lg border-yellow my-4" type="text" id="username" name="_username" value="{{ last_username }}"/>
+						<input class="form-control form-control-lg border-yellow my-4" id="username" name="_username" value="{{ last_username }}"/>
 					</div>
 					<div class="mt-2 pb-3">
 						<label for="password">Votre mot de passe</label>
@@ -68,18 +68,3 @@
 
 </div>
 {% endblock %}
-
-
-
-
-    {# <form action="{{ path('login') }}" method="post">
-        
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
-
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"/> #}
-
-        {# <button class="btn btn-yellow" type="submit">login</button>
-    </form> #} 
