@@ -8,34 +8,48 @@
 	<h3>Détail du livre :
 	</h3>
 
-	<li>{{ book.getImageName() }}</li>
+	<img src="{{ book.getImageName() }}"></img>
 
 
-	<li>{{ book.getTitle() }}</li>
+<li>{{ book.getTitle() }}</li>
 
-	<li>{{ book.getAuthor() }}</li>
+<li>{{ book.getAuthor() }}</li>
 
-	<li>{{ book.getDate() }}</li>
+<li>{{ book.getDate()|date("d/m/Y") }}</li>
 
-	<li>{{ book.getDescription() }}</li>
+<li>{{ book.getDescription() }}</li>
 
-	<li>{{ book.getPublisher() }}</li>
+<li>{{ book.getPublisher() }}</li>
 
-	<li>{{ book.getCategory() }}</li>
+<li>{{ book.getCategory() }}</li>
 
-	<li>{{ book.getStatus() }}</li>
+{% if book.getStatus() %}
+	<li>Disponible</li>
+{% else %}
+	<li>
+		Indisponible</li>
+{% endif %}
 
-	<li>{{ book.getLastUser() }}</li>
 
-	{# <li>{{ book.getLoanDate() }}</li>
+<h3>Emprunteur :
+</h3>
+<li>{{ book.getLastUser().getFirstName() }}</li>
+<li>{{ book.getLastUser().getLastName() }}</li>
 
-	<li>{{ book.getDueDate() }}</li> #}
+
+<li>Date d'emprunt :
+	{{ book.getLoanDate()|date("d/m/Y") }}</li>
+
+<li>Date de retour :
+	{{ book.getDueDate()|date("d/m/Y") }}</li>
 
 
-	<br>
+<br>
 
-	{# <a href="{{path('user_edit',{id})}}" class="btn btn-warning">
-		Modifier l'utilisateur
-	</a> #}
+    <td>
+        <a href="../edit/{{ book.getId() }}" class="btn btn-warning">
+            Modifier
+        </a>
+    </td>
 
 {% endblock %}
