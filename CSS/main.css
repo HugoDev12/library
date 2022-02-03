@@ -1,3 +1,110 @@
-h1 {
-    background-color: red;
+
+
+/* -------------------------------------Creating bootstrap yellow class------------------------------------- */
+
+:root {
+    --yellow:#feb546;
 }
+.bg-yellow {
+    --bs-bg-opacity: 1;
+    background-color: var(--yellow) !important;
+    color: #fff;
+}
+.border-yellow{
+border: solid 2px var(--yellow);
+}
+
+.btn-yellow {
+    color: #fff;
+    background-color: var(--yellow);
+    border-color: var(--yellow);
+}
+.btn-yellow:hover {
+    color: var(--yellow);
+    background-color: var(--white);
+    border-color: var(--yellow);
+}
+
+/* -------------------------------------Creating bootstrap red class------------------------------------- */
+:root {
+    --red:#e03268;
+}
+.bg-red {
+    --bs-bg-opacity: 1;
+    background-color: var(--red) !important;
+    color: #fff;
+}
+.border-red{
+border: solid 2px var(--red);
+}
+
+.btn-red {
+    color: #fff;
+    background-color: var(--red);
+    border-color: var(--red);
+}
+.btn-red:hover {
+    color: var(--red);
+    background-color: var(--white);
+    border-color: var(--red);
+}
+
+/* -------------------------------------Creating bootstrap green class------------------------------------- */
+
+:root {
+    --green:#3dc7b9;
+}
+.bg-green {
+    --bs-bg-opacity: 1;
+    background-color: var(--green) !important;
+    color: #fff;
+}
+.border-green{
+border: solid 2px var(--green);
+}
+
+.btn-green {
+    color: #fff;
+    background-color: var(--green);
+    border-color: var(--green);
+}
+.btn-green:hover {
+    color: var(--green);
+    background-color: var(--white);
+    border-color: var(--green);
+}
+
+
+
+/* -------------------------------------general------------------------------------- */
+
+
+* {
+    background-color:#ffff;
+    color: #07085b;
+    font-family: 'Montserrat', sans-serif;
+    font-size: light;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2em;
+}
+
+
+#logo {
+    width: 18rem;
+}
+
+#kids {
+    width: 10rem;
+}
+
+#bookImg {
+    width: 10rem;
+}
+
+.orange {
+    background-color: #feb546;
+}
+

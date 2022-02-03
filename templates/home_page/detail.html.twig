@@ -31,6 +31,8 @@
 {% endif %}
 
 
+
+{% if book.getLastUser() %}
 <h3>Emprunteur :
 </h3>
 <li>{{ book.getLastUser().getFirstName() }}</li>
@@ -42,7 +44,7 @@
 
 <li>Date de retour :
 	{{ book.getDueDate()|date("d/m/Y") }}</li>
-
+{% endif %}
 
 <br>
 
