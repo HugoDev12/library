@@ -130,13 +130,16 @@ class HomePageController extends AbstractController
                 $book->setStatus(1);
             } else {
                 $book->setStatus(0);
+                $book->setLoanDate(new \DateTime());
+                $book->setDueDate(new \DateTime('+30days'));
                 $userId = $edit->getLastUser();
                 $user = $entityManager->getRepository(User::class)->find($userId);
-                // $history = $entityManager->getRepository(History::class)->findAll();
 
                 $history = new History;
                 $history->setUser($user);
                 $history->setBook($book);
+                $entityManager->persist($history);
+                $entityManager->flush();
             }
 
             $book->setTitle($edit->getTitle());
@@ -151,12 +154,9 @@ class HomePageController extends AbstractController
             $book->setLastUser($edit->getLastUser());
 
       
-
-
             $entityManager->persist($book);
             $entityManager->flush();
-            $entityManager->persist($history);
-            $entityManager->flush();
+
             return $this->redirectToRoute('home');
         }
 
@@ -174,7 +174,11 @@ class HomePageController extends AbstractController
         $em = $doctrine->getManager();
         $book = $em->getRepository(Books::class)->find($id);
         $history = $em->getRepository(History::class)->findOneBy(["book"=>$id]);
-        $book->removeBookHistory($history);
+
+        if(!is_null($history)){
+            $book->removeBookHistory($history);
+        }
+        
         $em->remove($book);
         $em->flush();
 
@@ -193,6 +197,8 @@ class HomePageController extends AbstractController
         $book = $entityManager->getRepository(Books::class)->find($id);
 
         $book->setLastUser(null);
+        $book->setLoanDate(null);
+        $book->setDueDate(null);
         $book->setStatus(1);
 
 
