@@ -13,7 +13,6 @@ Les Livres
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-
 	$(document).ready(function () {
 		$('#books').DataTable({
 			language: {
@@ -61,7 +60,6 @@ Les Livres
 		width: 95%;
 		font: 18px / 1.5 sans-serif;
 	}
-
 	.example-wrapper code {
 		background: #F5F5F5;
 		padding: 2px 6px;
@@ -148,10 +146,12 @@ Les Livres
 				</td>
 
 				<td>
-					<a href="edit/{{ book.getId() }}" class="btn btn-warning">
-						Modifier
+					<a href="detail/{{ book.getId() }}" class="btn btn-warning">
+						Détail
 					</a>
 				</td>
+
+				
 
 				<td>
 					{% if (book.getlastUser() != null) %}
