@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Détail du livre
+{% endblock %}
+
+{% block body %}
+	<h3>Détail du livre :
+	</h3>
+
+	<img src="{{ book.getImageName() }}"></img>
+
+
+<li>{{ book.getTitle() }}</li>
+
+<li>{{ book.getAuthor() }}</li>
+
+<li>{{ book.getDate()|date("d/m/Y") }}</li>
+
+<li>{{ book.getDescription() }}</li>
+
+<li>{{ book.getPublisher() }}</li>
+
+<li>{{ book.getCategory() }}</li>
+
+{% if book.getStatus() %}
+	<li>Disponible</li>
+{% else %}
+	<li>
+		Indisponible</li>
+{% endif %}
+
+
+<h3>Emprunteur :
+</h3>
+<li>{{ book.getLastUser().getFirstName() }}</li>
+<li>{{ book.getLastUser().getLastName() }}</li>
+
+
+<li>Date d'emprunt :
+	{{ book.getLoanDate()|date("d/m/Y") }}</li>
+
+<li>Date de retour :
+	{{ book.getDueDate()|date("d/m/Y") }}</li>
+
+
+<br>
+
+    <td>
+        <a href="../edit/{{ book.getId() }}" class="btn btn-warning">
+            Modifier
+        </a>
+    </td>
+
+{% endblock %}
