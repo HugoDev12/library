@@ -12,39 +12,12 @@
 
 
 
-
-
-
 {% block body %}
-
-<header>
-	<div class="text-center img-fluid img-thumbnail">
-		<img src="{{ absolute_url(asset('../public/images/logo.png')) }}" alt="logo de la bibliothèque" id="logo"/>
-		<h1>Bienvenue sur votre page de connexion !</h1>
-	</div> 
-</header>
 
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-
-<div class="col-4 card-body p-2 border-yellow" style="border-radius: 1rem">
-    <form action="{{ path('login') }}" method="post">
-		<div class="form-outline mb-2 row">
-			<div class="form-outline mb-2 col-6">
-        		<label class="justify-content-center" for="username">Email:</label><br>
-        		<input class="form-control form-control-lg border-yellow" type="text" id="username" name="_username" value="{{ last_username }}"/><br>
-			</div>
-		</div>
-
-		<div class="form-outline mb-4 row">
-			<div class="form-outline mb-4 col-6">
-				<label for="password">Password:</label><br>
-				<input class="form-control form-control-lg border-yellow" type="password" id="password" name="_password"/><br>
-			</div>
-		</div>
-</div>
 
 
 

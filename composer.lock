@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "0673d2bd95baafb50e01a8ef71ad485c",
-=======
-    "content-hash": "d1acc9df44802310c79d470a5daa0bbd",
->>>>>>> 62683e901aa94346206cdd3b5c66ba02a3b72f15
+    "content-hash": "185e2124e0bedf82ce66a8b705d7d5f2",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -6001,16 +5997,16 @@
         },
         {
             "name": "twig/extra-bundle",
-            "version": "v3.3.7",
+            "version": "v3.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "e0cc9c35a0650006b0da232a3f749cc060c65d3b"
+                "reference": "2e58256b0e9fe52f30149347c0547e4633304765"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/e0cc9c35a0650006b0da232a3f749cc060c65d3b",
-                "reference": "e0cc9c35a0650006b0da232a3f749cc060c65d3b",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/2e58256b0e9fe52f30149347c0547e4633304765",
+                "reference": "2e58256b0e9fe52f30149347c0547e4633304765",
                 "shasum": ""
             },
             "require": {
@@ -6064,7 +6060,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.3.7"
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.3.8"
             },
             "funding": [
                 {
@@ -6076,7 +6072,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-03T21:04:59+00:00"
+            "time": "2022-01-04T13:58:53+00:00"
         },
         {
             "name": "twig/intl-extra",
@@ -6149,16 +6145,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.3.7",
+            "version": "v3.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "8f168c6ffa3ce76d1786b3cd52275424a3fc675b"
+                "reference": "972d8604a92b7054828b539f2febb0211dd5945c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8f168c6ffa3ce76d1786b3cd52275424a3fc675b",
-                "reference": "8f168c6ffa3ce76d1786b3cd52275424a3fc675b",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/972d8604a92b7054828b539f2febb0211dd5945c",
+                "reference": "972d8604a92b7054828b539f2febb0211dd5945c",
                 "shasum": ""
             },
             "require": {
@@ -6209,7 +6205,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.3.7"
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.8"
             },
             "funding": [
                 {
@@ -6221,7 +6217,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-03T21:15:37+00:00"
+            "time": "2022-02-04T06:59:48+00:00"
         }
     ],
     "packages-dev": [
