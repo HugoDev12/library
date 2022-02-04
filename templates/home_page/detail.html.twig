@@ -8,7 +8,12 @@
 {% block stylesheets %}
 	<link rel="stylesheet" href="../../CSS/main.css">
 	<link rel="stylesheet" href="../../CSS/book_detail.css">
-
+	<style>
+		main {
+			position: relative;
+			left: 25vw !important;
+		}
+	</style>
 
 {% endblock %}
 
@@ -16,7 +21,7 @@
 
 	{{ parent() }}
 	<br>
-	<main class="mt-1 pt-4">
+	{# <main class="mt-1 pt-4"> #}
 		<div
 			class="container dark-grey-text">
 
