@@ -149,16 +149,19 @@ Les Livres
 				</td>
 
 				<td>
-					<a href="detail/{{ book.getId() }}" class="btn btn-warning">
+					<a href="home/detail/{{ book.getId() }}" class="btn btn-warning">
 						Détail
 					</a>
+					{# <a href="{{ path('book_edit'), {book.getId()}}}" class="btn btn-warning">
+						Détail
+					</a> #}
 				</td>
 
 				
 
 				<td>
 					{% if (book.getlastUser() != null) %}
-					<a href="return/{{ book.getId() }}" class="btn btn-yellow">
+					<a href="home/return/{{ book.getId() }}" class="btn btn-yellow">
 						Rendu
 					</a>
 					{% endif %}

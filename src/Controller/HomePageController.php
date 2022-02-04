@@ -8,19 +8,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Books;
-use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\User;
 use App\Entity\History;
-use PhpParser\Node\Expr\Cast\Object_;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Doctrine\ORM\EntityRepository;
+
 
 class HomePageController extends AbstractController
 {
@@ -57,14 +56,6 @@ class HomePageController extends AbstractController
         $form = $this->createFormBuilder($book)
             ->add('title', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('author', TextType::class, ["attr" => ["class" => "form-control"]])
-            // ->add('author', CollectionType::class, [
-            //     // each entry in the array will be an "email" field
-            //     // 'entry_type' => EmailType::class,
-            //     // these options are passed to each "email" type
-            //     'entry_options' => [
-            //         'attr' => ['class' => 'form-control'],
-            //     ],
-            // ])
 
             ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
             ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
@@ -143,6 +134,11 @@ class HomePageController extends AbstractController
 
             ->add('last_user', EntityType::class, [
                 'class' => User::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.roles = :roles')
+                        ->setParameter('roles', '["ROLE_USER"]');
+                },
                 'choice_label' => 'id',
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Utilisateur',
