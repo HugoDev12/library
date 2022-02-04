@@ -130,6 +130,12 @@ nav {
     font-size: larger;
 }
 
+main {
+    position: relative;
+    left: 20vw;
+    /* top: 10vh; */
+}
+
 /* -------------------------------------Livres------------------------------------- */
 
 #books_length{
