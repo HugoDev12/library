@@ -97,15 +97,18 @@ font-size: 2em;
 }
 
 #kids {
-    width: 10rem;
+    width: 15rem;
 }
 
 #bookImg {
-    width: 10rem;
+    width: 15rem;
 }
 
 .orange {
     background-color: #feb546;
+}
+.input {
+    border-radius: 3em;
 }
 
 /* -------------------------------------Livres------------------------------------- */
@@ -163,8 +166,6 @@ background-color: transparent;
 margin-left: 3px;
 }
 
-.input {
-    border-radius: 3em;
 
 .book_img{
 width: 4em;
