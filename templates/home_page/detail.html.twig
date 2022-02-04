@@ -4,54 +4,100 @@
 	Détail du livre
 {% endblock %}
 
-{% block body %}
-	<h3>Détail du livre :
-	</h3>
 
-	<img src="{{ book.getImageName() }}"></img>
+{% block stylesheets %}
+	<link rel="stylesheet" href="../../CSS/main.css">
+	<link rel="stylesheet" href="../../CSS/book_detail.css">
 
-
-<li>{{ book.getTitle() }}</li>
-
-<li>{{ book.getAuthor() }}</li>
-
-<li>{{ book.getDate()|date("d/m/Y") }}</li>
-
-<li>{{ book.getDescription() }}</li>
-
-<li>{{ book.getPublisher() }}</li>
-
-<li>{{ book.getCategory() }}</li>
-
-{% if book.getStatus() %}
-	<li>Disponible</li>
-{% else %}
-	<li>
-		Indisponible</li>
-{% endif %}
-
-
-
-{% if book.getLastUser() %}
-<h3>Emprunteur :
-</h3>
-<li>{{ book.getLastUser().getFirstName() }}</li>
-<li>{{ book.getLastUser().getLastName() }}</li>
-
-
-<li>Date d'emprunt :
-	{{ book.getLoanDate()|date("d/m/Y") }}</li>
-
-<li>Date de retour :
-	{{ book.getDueDate()|date("d/m/Y") }}</li>
-{% endif %}
-
-<br>
-
-    <td>
-        <a href="../edit/{{ book.getId() }}" class="btn btn-warning">
-            Modifier
-        </a>
-    </td>
 
 {% endblock %}
+
+{% block body %}
+
+	{{ parent() }}
+	<br>
+	<main class="mt-1 pt-4">
+		<div
+			class="container dark-grey-text">
+
+			<!--Grid row-->
+			<div
+				class="row wow fadeIn">
+				<!--Grid column-->
+				<div class="col-md-3 my-4 mx-3 text-center">
+					<img src="{{ book.getImageName() }}" class="img-fluid book-img" alt="book"></img>
+
+			</div>
+			<!--Grid column-->
+
+			<!--Grid column-->
+			<div
+				class="col-md-6 mb-4">
+
+				<!--Content-->
+
+				<div class="p-2">
+					<p class="lead">
+						<div class="mb-3">
+							<h3>{{ book.getTitle() }}</h3>
+						</div>
+						<span>{{ book.getAuthor() }}</span>
+					</p>
+					<p>Publié le
+						{{ book.getDate()|date("d/m/Y") }}
+						/ Maison d'édition :
+						{{ book.getPublisher() }}</p>
+					<p>Catégorie :
+						{{ book.getCategory() }}</p>
+
+					<p class="lead font-weight-bold">Résumé</p>
+
+					<p>{{ book.getDescription() }}</p>
+
+					{% if book.getStatus() %}
+						<div class="alert alert-success text-center" role="alert">Disponible</div>
+					{% else %}
+						<div class="alert alert-danger text-center" role="alert">Indisponible</div>
+					{% endif %}
+					{% if book.getLastUser() %}
+						<hr>
+						<div
+							class="row d-flex wow fadeIn">
+
+							<!--Grid column-->
+							<div class="col-md-12">
+
+								<h4 class="my-4 h4">Emprunteur :</h4>
+								<li>Prénom :
+									{{ book.getLastUser().getFirstName() }}</li>
+								<li>Nom :
+									{{ book.getLastUser().getLastName() }}</li>
+								<li>Identifiant :
+									{{ book.getLastUser().getId() }}</li>
+
+								<li>Date d'emprunt :
+									{{ book.getLoanDate()|date("d/m/Y") }}</li>
+
+								<li>Date de retour :
+									{{ book.getDueDate()|date("d/m/Y") }}</li>
+							</div>
+
+							<!--Content-->
+						</div>
+					{% endif %}
+					<div class="my-5">
+						<a href="../edit/{{ book.getId() }}" class="btn btn-warning">
+							Modifier le livre
+						</a>
+					</div>
+
+					<!--Grid column-->
+				</div>
+				<!--Grid row-->
+			</div>
+			<!--Grid column-->
+
+		</div>
+
+
+	{% endblock %}
