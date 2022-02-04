@@ -1,3 +1,27 @@
-form {
-    background-color: red;
+#logo_login {
+text-align: center;
+width:14em;
+height : auto;
+margin:auto;
+display:flex;
+}
+
+#login_image {
+text-align: left;
+width:36em;
+height : auto;
+text-align:center;
+margin-left:16em;
+display:flex;
+}
+
+.form-control-lg{
+border-radius: 1rem;
+font-size: 1.5rem;
+text-align: center;
+}
+
+#login_formulaire{
+margin-right: 5em;
+margin-left:-6em;
 }
