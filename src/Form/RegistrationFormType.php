@@ -20,20 +20,13 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, ['attr' => ["class" => "form-control email"]])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
-            ->add('plainPassword', PasswordType::class, [
+            ->add('email', EmailType::class, ['attr' => ["class" => "form-control form-control-lg border-yellow my-4 input"]])
+            ->add('plainPassword', PasswordType::class, 
+            [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => ['autocomplete' => 'new-password'], 
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -43,11 +36,11 @@ class RegistrationFormType extends AbstractType
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
-                    ]),
+                    ])
                 ],
             ])
-            ->add('first_name', TextType::class, ["label" => "prénom"], ["attr" => ["class" => "form-control"]])
-            ->add('last_name', TextType::class, ["label" => "nom"], ["attr" => ["class" => "form-control"]])
+            ->add('first_name', TextType::class,  ["attr" => ["class" => "form-control form-control-lg border-yellow my-4 input"]])
+            ->add('last_name', TextType::class, ["attr" => ["class" => "form-control form-control-lg border-yellow my-4 input"]])
         ;
     }
 
