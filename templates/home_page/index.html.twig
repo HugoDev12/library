@@ -7,6 +7,7 @@ Les Livres
 
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
 {% endblock %}
 
 {% block javascripts %}
@@ -56,13 +57,13 @@ Les Livres
 </div>
 {% endfor %} #}
 <style>
-	.example-wrapper {
-		margin: 1em auto;
+	.book-list {
+		margin: 3em auto;
 		max-width: 800px;
-		width: 95%;
+		width: 80%;
 		font: 18px / 1.5 sans-serif;
 	}
-	.example-wrapper code {
+	.book-list code {
 		background: #F5F5F5;
 		padding: 2px 6px;
 	}
@@ -82,7 +83,7 @@ Les Livres
 </div>
 {% endfor %}
 
-<div class="example-wrapper">
+<div class="book-list">
 
 	<div class="text-align-center mb-2">
 		<h1>Les Livres</h1>
@@ -90,6 +91,7 @@ Les Livres
 	<a href="{{ path('book_create') }}">
 		Ajouter
 	</a>
+
 
 	<table id="books" class="table">
 		<thead>
@@ -122,7 +124,7 @@ Les Livres
 			<tr>
 				{% for book in books %}
 				<th scope="row">
-				<img src="{{ book.getImageName() }}"></img>
+				<img src="{{ book.getImageName() }}" class="book_img"></img>
 				</th>
 				<td>
 					{{ book.getTitle() }}
@@ -170,6 +172,11 @@ Les Livres
 			{% endfor %}
 		</tbody>
 	</table>
+	<div class="mt-2">
+	<a href="{{ path('book_create') }}" class="float-right btn btn-yellow">
+		Ajouter un livre
+	</a>
+</div>
 
 </div>
 </main>
