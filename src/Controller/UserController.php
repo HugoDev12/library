@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class UserController extends AbstractController
 {
@@ -35,21 +36,21 @@ class UserController extends AbstractController
     public function userRegister(Request $request, EntityManagerInterface $em, ManagerRegistry $doctrine): Response
     {
         $user = new User();
-		$user->setEmail('Email de l\'utilisateur');
-		$user->setFirstName('Prénom de l\'utilisateur');
-		$user->setLastName('Nom de l\'utilisateur');
-		$user->setPhoneNumber('Numéro de l\'utilisateur');
-		$user->setAddress('Adresse de l\'utilisateur');
+		$user->setEmail("");
+		$user->setFirstName('');
+		$user->setLastName('');
+		$user->setPhoneNumber('');
+		$user->setAddress('');
 		$user->setRoles(['ROLE_USER']);
         $form = $this->createForm(RegistrationFormType::class, $user);
 
 		$form = $this->createFormBuilder($user)
-			->add('email', EmailType::class, ["attr" => ["class" => "form-control"]])
-			->add('first_name', TextType::class, ["attr" => ["class" => "form-control"]])
-			->add('last_name', TextType::class, ["attr" => ["class" => "form-control"]])
-			->add('phone_number', TextType::class, ["attr" => ["class" => "form-control"]])
-			->add('address', TextType::class, ["attr" => ["class" => "form-control"]])
-			->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
+			->add('email', EmailType::class, ["attr" => ["class" => "form-control form-control-lg border-yellow my-2 px-5 input"]])
+			->add('first_name', TextType::class, ["attr" => ["class" => "form-control form-control-lg border-yellow my-2 px-5 input"]])
+			->add('last_name', TextType::class, ["attr" => ["class" => "form-control form-control-lg border-yellow my-2 px-5 input"]])
+			->add('phone_number', TextType::class, ["attr" => ["class" => "form-control form-control-lg border-yellow my-2 px-5 input"]])
+			->add('address', TextareaType::class, ["attr" => ["class" => "form-control form-control-lg border-yellow my-2 px-5 lowrad"]])
+			->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-green py-2 px-5 font-larger"]])
 			->getForm();
 
         $form->handleRequest($request);

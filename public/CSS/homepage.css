@@ -1,12 +1,4 @@
-nav {
-height: 100vh;
-overflow: hidden;
-position: fixed;
-}
 
-.book_img {
-    width: 5em;
-}
 
 main {
     position: relative;

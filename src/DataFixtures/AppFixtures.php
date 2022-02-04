@@ -30,14 +30,9 @@ class AppFixtures extends Fixture
 
         
         $newBook->setTitle($book["title"]);
-        // $newBook->setPageCount($book["pageCount"]);
-        // $newBook->setDate($book["publishedDate"]["dt_txt"]);
-        // $newBook->setShortDescription($book["shortDescription"]);
         $newBook->setDate(new \DateTime("now"));
         $newBook->setAuthor($book["authors"]);
-        // implode(",",$book["authors"])
         $newBook->setCategory($book["categories"]);
-        // $newBook->setImageName($book["thumbnailUrl"]);
         $newBook->setStatus(1);
         $newBook->setImageFile(null);
         $newBook->setLoanDate(null);

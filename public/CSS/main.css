@@ -43,6 +43,7 @@ border: solid 2px var(--red);
     background-color: var(--red);
     border-color: var(--red);
 }
+
 .btn-red:hover {
     color: var(--red);
     background-color: var(--white);
@@ -108,7 +109,25 @@ font-size: 2em;
     background-color: #feb546;
 }
 .input {
-    border-radius: 3em;
+    border-radius: 2em;
+}
+
+nav {
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    }
+    
+.book_img {
+        width: 5em;
+}
+
+.lowrad {
+    border-radius: 5px;
+}
+
+.font-larger {
+    font-size: larger;
 }
 
 /* -------------------------------------Livres------------------------------------- */
