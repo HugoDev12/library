@@ -2,8 +2,7 @@
   "entrypoints": {
     "app": {
       "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/app.js"
+        "http://localhost:8080/build/runtime.js"
       ]
     }
   }
