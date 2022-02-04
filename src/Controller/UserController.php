@@ -31,7 +31,7 @@ class UserController extends AbstractController
         ]);
     }
 
-	#[Route('/adduser', name: 'app_register')]
+	#[Route('/adduser', name: 'user_register')]
     public function userRegister(Request $request, EntityManagerInterface $em, ManagerRegistry $doctrine): Response
     {
         $user = new User();

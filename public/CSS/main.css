@@ -93,7 +93,7 @@ font-size: 2em;
 
 
 #logo {
-    width: 18rem;
+    width: 20rem;
 }
 
 #kids {
@@ -106,5 +106,9 @@ font-size: 2em;
 
 .orange {
     background-color: #feb546;
+}
+
+.email {
+    border-radius: 3em;
 }
 
