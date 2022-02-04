@@ -2,18 +2,47 @@
 
 {% block title %}Register{% endblock %}
 
+
 {% block body %}
-    <h1>Register</h1>
+<main>
+    <div class="row d-flex align-items-center justify-content-center">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.first_name) }}
-        {{ form_row(registrationForm.last_name) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="col-4 align-items-center">
+            <h1>Créer votre compte</h1>
+            <img class="my-2" src="{{ asset('../public/images/login-image.png') }}" id="login_image"
+                alt="image du login" />
+        </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <div class="col-5">
+            {{ form_start(registrationForm) }}
+            <div class="col form-control form-control-lg border-yellow p-5 my-5 d-flex flex-column align-items-center"
+                style="border-radius: 3em">
+                <div class="pb-3">
+                    {{ form_row(registrationForm.email) }}
+                </div>
+                <div class="pb-3">
+                    {{ form_row(registrationForm.plainPassword, {
+                    label: 'Mot de Passe',
+                    attr : {'class' : 'form-control form-control-lg border-yellow my-4 input'}
+                    }) }}
+                </div>
+                <div class="pb-3">
+                    {{ form_row(registrationForm.first_name, {
+                    label: "Prénom"
+                    }) }}
+                </div>
+                <div class="pb-3">
+                    {{ form_row(registrationForm.last_name , {
+                    label: "Nom"
+                    }) }}
+                </div>
+                <div class="text-align-center">
+                    <button type="submit" class="mt-1 py-2 px-4 btn btn-yellow">Créer</button>
+                </div>
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+</main>
+<br><br>
 {% endblock %}
