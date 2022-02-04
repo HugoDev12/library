@@ -11,7 +11,7 @@
     color: #fff;
 }
 .border-yellow{
-border: solid 3px var(--yellow);
+border: solid 2px var(--yellow);
 }
 
 .btn-yellow {
@@ -35,7 +35,7 @@ border: solid 3px var(--yellow);
     color: #fff;
 }
 .border-red{
-border: solid 3px var(--red);
+border: solid 2px var(--red);
 }
 
 .btn-red {
@@ -60,7 +60,7 @@ border: solid 3px var(--red);
     color: #fff;
 }
 .border-green{
-border: solid 3px var(--green);
+border: solid 2px var(--green);
 }
 
 .btn-green {
@@ -86,8 +86,9 @@ border: solid 3px var(--green);
 }
 
 h1 {
-  text-align: center;
-  font-size: 1.4em;
+color: #07085b;
+text-align: center;
+font-size: 2em;
 }
 
 
