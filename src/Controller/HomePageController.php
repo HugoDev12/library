@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class HomePageController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/home', name: 'home')]
     public function index(ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
@@ -37,7 +37,7 @@ class HomePageController extends AbstractController
     }
 
 
-    #[Route('/create', name: 'book_create')]
+    #[Route('/home/create', name: 'book_create')]
     public function create(Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
         $book = new Books();
@@ -124,7 +124,7 @@ class HomePageController extends AbstractController
 
 
 
-    #[Route('/edit/{id}', name: 'book_edit')]
+    #[Route('/home/edit/{id}', name: 'book_edit')]
     public function edit(ManagerRegistry $doctrine, int $id, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
@@ -201,7 +201,7 @@ class HomePageController extends AbstractController
     }
 
 
-    #[Route('/delete/{id}', name: 'delete_book')]
+    #[Route('/home/delete/{id}', name: 'delete_book')]
     public function delete(Int $id, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
@@ -222,7 +222,7 @@ class HomePageController extends AbstractController
     }
 
 
-    #[Route('/return/{id}', name: 'book_return')]
+    #[Route('/home/return/{id}', name: 'book_return')]
     public function return(ManagerRegistry $doctrine, int $id): Response
 
     {
@@ -241,7 +241,7 @@ class HomePageController extends AbstractController
     }
 
 
-    #[Route('/detail/{id}', name: 'book_detail')]
+    #[Route('/home/detail/{id}', name: 'book_detail')]
     public function viewBookDetail(Int $id, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
