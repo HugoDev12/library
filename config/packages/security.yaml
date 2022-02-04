@@ -1,4 +1,9 @@
 security:
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
@@ -36,15 +41,21 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: "/home", roles: ROLE_ADMIN }
         # - { path: "/create", roles: ROLE_ADMIN }
-        # - { path: "/create", roles: ROLE_ADMIN }
-        # - { path: "/create", roles: ROLE_ADMIN }
-        # - { path: "/create", roles: ROLE_ADMIN }
-        # - { path: "/create", roles: ROLE_ADMIN }
-        # - { path: "/create", roles: ROLE_ADMIN }
+        # - { path: "/edit", roles: ROLE_ADMIN }
+        # - { path: "/delete", roles: ROLE_ADMIN }
+        # - { path: "/return", roles: ROLE_ADMIN }
+        # - { path: "/detail", roles: ROLE_ADMIN }
+        - { path: "/user", roles: ROLE_ADMIN }
+        - { path: "/adduser", roles: ROLE_ADMIN }
+        - { path: "/user/edit", roles: ROLE_ADMIN }
+        - { path: "/user/delete", roles: ROLE_ADMIN }
+        - { path: "/user/detail", roles: ROLE_ADMIN }
 
         # - { path: ^/profile, roles: ROLE_USER }
-
+        # or require ROLE_ADMIN or IS_AUTHENTICATED_FULLY for /admin*
+        - { path: '^/admin', roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN] }
 when@test:
     security:
         password_hashers:
