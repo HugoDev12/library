@@ -1,17 +1,17 @@
-
-
 /* -------------------------------------Creating bootstrap yellow class------------------------------------- */
 
 :root {
-    --yellow:#feb546;
+    --yellow: #feb546;
 }
+
 .bg-yellow {
     --bs-bg-opacity: 1;
     background-color: var(--yellow) !important;
     color: #fff;
 }
-.border-yellow{
-border: solid 2px var(--yellow);
+
+.border-yellow {
+    border: solid 2px var(--yellow);
 }
 
 .btn-yellow {
@@ -19,23 +19,28 @@ border: solid 2px var(--yellow);
     background-color: var(--yellow) !important;
     border-color: var(--yellow) !important;
 }
+
 .btn-yellow:hover {
     color: var(--yellow) !important;
-    background-color: var(--white);
+    background-color: var(--white) !important;
     border-color: var(--yellow) !important;
 }
 
+
 /* -------------------------------------Creating bootstrap red class------------------------------------- */
+
 :root {
-    --red:#e03268;
+    --red: #e03268;
 }
+
 .bg-red {
     --bs-bg-opacity: 1;
     background-color: var(--red) !important;
     color: #fff;
 }
-.border-red{
-border: solid 2px var(--red);
+
+.border-red {
+    border: solid 2px var(--red);
 }
 
 .btn-red {
@@ -50,18 +55,21 @@ border: solid 2px var(--red);
     border-color: var(--red);
 }
 
+
 /* -------------------------------------Creating bootstrap green class------------------------------------- */
 
 :root {
-    --green:#3dc7b9;
+    --green: #3dc7b9;
 }
+
 .bg-green {
     --bs-bg-opacity: 1;
     background-color: var(--green) !important;
     color: #fff;
 }
-.border-green{
-border: solid 2px var(--green);
+
+.border-green {
+    border: solid 2px var(--green);
 }
 
 .btn-green {
@@ -69,21 +77,20 @@ border: solid 2px var(--green);
     background-color: var(--green);
     border-color: var(--green);
 }
+
 .btn-green:hover {
     color: var(--green);
-    background-color: #fff;
+    background-color: var(--white);
     border-color: var(--green);
 }
-
-
 
 /* -------------------------------------general------------------------------------- */
 
 
 * {
-    color: #07085b;
-    font-family: 'Montserrat', sans-serif;
-    font-size: light;
+color: #07085b;
+font-family: 'Montserrat', sans-serif;
+font-size: light;
 }
 
 h1 {
@@ -99,28 +106,11 @@ text-align: center;
 font-size: 1.4em;
 }
 
-
-#logo {
-    /* width: 20rem; */
-}
-
-#kids {
-    /* width: 15rem; */
-}
-
-#bookImg {
-    /* width: 15rem; */
-}
-
-.orange {
-    background-color: #feb546;
-}
 .input {
     border-radius: 0.3em;
 }
 
 nav {
-    /* height: 100vh; */
     overflow: hidden;
     }
     
@@ -138,6 +128,10 @@ nav {
 
 main {
     position: relative;
+}
+
+main section{
+margin-bottom: 90px;
 }
 
 footer{
@@ -161,7 +155,7 @@ margin-bottom:2.5em;
 }
 
 #books_wrapper{
-/* width: 60%; */
+width: 80%;
 /* margin-left:11em; */
 margin-top: 3em;
 }
