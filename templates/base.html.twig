@@ -31,27 +31,27 @@
         <nav class="col-2 p-0 m-0 bg-yellow">
             <aside class="d-flex align-content-around flex-wrap">
                 <div class="bg-yellow">
-                    <figure>
+                    <figure class="m-0">
                         <img src="/library/public/images/logo.png" id="logo" alt="Logo" class="img-fluid">
                     </figure>
                 </div>
-				<div class="bg-white d-flex flex-column p-3 align-content-around pt-5">
+				<div class="bg-white d-flex flex-column p-3 pb-0 align-content-around pt-3">
 					<a href="/library/public/home" class="btn btn-yellow" style="font-size: 1.2rem;">Ma Bibliothèque</a>
-					<figure>
+					<figure class="m-0">
 						<img src="/library/public/images/books.png" id="bookImg" alt="Books" class="img-fluid">
 					</figure>
 				</div>
-                <div class="text-center d-flex flex-column p-3 align-content-around pt-5">
-                    <a href="/library/public/user" class="btn btn-green mb-5" style="font-size: 1.2rem;">Utilisateurs</a>
-                    <figure>
+                <div class="text-center d-flex flex-column p-3 pb-0 align-content-around pt-3 mb-4">
+                    <a href="/library/public/user" class="btn btn-green mb-3" style="font-size: 1.2rem;">Utilisateurs</a>
+                    <figure class="m-0">
                         <img id="kids" src="/library/public/images/kids.png" alt="Kids" class="img-fluid">
                     </figure>
 				</div>
-				<div class="text-center d-flex flex-column p-3 align-content-around pt-5">
-                    <a href="/library/public/adduser" class="btn btn-primary mb-3" style="font-size: 1.2rem;">Ajouter un
-                        Utilisateur</a>
-                    <a href="{{ path('app_logout') }}" class='mx-3 btn btn-danger' style="font-size: 1.2rem;">Se
-                        deconnecter</a>
+				<div class="d-flex flex-column p-3 align-content-around">
+					<div class="text-center">
+						<a href="/library/public/adduser" class="btn btn-green mb-3" >Ajouter un utilisateur</a>
+                    	<a href="{{ path('app_logout') }}" class="btn btn-red">Se deconnecter</a>
+					</div>
 				</div>
             </aside>
         </nav>
