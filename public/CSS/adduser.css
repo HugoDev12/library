@@ -14,17 +14,18 @@
 .example-wrapper code {
 	background: #F5F5F5;
 }
+*/
+
+
 
 #adduserImg {
-	position: relative;
-	left: 0;
-	top: 9rem;
+	position: absolute;
+	top: -104px;
 }
 
-#form_image {
-	width: 28em;
-
-} */
+#form_image{
+max-height: 70vh; 
+}
 
 .form-control-lg {
     min-height: calc(1em + 0.75rem + 2px);
