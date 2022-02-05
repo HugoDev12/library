@@ -1,5 +1,34 @@
 #separateur{
-width: 700px;
-height: 10em;
-margin: 5em;
+	width: 700px;
+	height: 10em;
+	margin: 5em;
+}
+
+.example-wrapper {
+	margin: 1em auto;
+	max-width: 800px;
+	width: 95%;
+	font: 18px/1.5 sans-serif;
+}
+
+.example-wrapper code {
+	background: #F5F5F5;
+	padding: 2px 6px;
+}
+
+#adduserImg {
+	position: relative;
+	left: 0;
+	top: 9rem;
+}
+
+h1 {
+	position: relative;
+	top: 10vh;
+	font-weight: bold;
+}
+
+#form_image {
+	width: 28em;
+
 }
