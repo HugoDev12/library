@@ -1,97 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-{#
-<link rel="stylesheet" href="{{ asset('../CSS/main.css') }}" /> #}
-
-<link rel="stylesheet" href="{{ asset('..public/CSS/homepage.css')}}">
+{% block title %}
+	Ajouter un utilisateur
 {% endblock %}
 
-{% block title %}Ajouter un utilisateur{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="{{ asset('../public/CSS/main.css')}}">
+	<link rel="stylesheet" href="{{ asset('../public/CSS/adduser.css')}}">
+{% endblock %}
 
-{% block body %}
-<style>
-    {# .example-wrapper {
-        margin: 1em auto;
-        max-width: 800px;
-        width: 95%;
-        font: 18px/1.5 sans-serif;
-    }
-
-    .example-wrapper code {
-        background: #F5F5F5;
-        padding: 2px 6px;
-    } #}
-
-    main {
-        position: relative;
-        left: 20vw;
-        top: -5vh;
-    }
-
-    #adduserImg {
-        position: relative;
-        left: 0;
-        top: 9rem;
-    }
-
-    h1 {
-        position: relative;
-        top: 10vh;
-        font-weight: bold;
-    }
-
-    #form_image {
-        width: 28em;
-
-    }
-</style>
-
-{{ parent() }}
-<div class="row d-flex align-items-center justify-content-center">
-        <h1 style="text-align: center; border-bottom: 2px solid #3dc7b9;" class="pb-3">Ajout d'un utilisateur</h1>
-    <div class="col-6 me-5">
-        <figure>
-            <img src="{{ asset('../public/images/sexy-woman.png') }}" alt="dessin pour le formulaire d'ajout d'un utilisateur"  id="adduserImg">
-        </figure>
-        {{ form_start(registrationForm) }}
-        <div class="col form-control form-control-lg border-yellow p-5 my-5 d-flex flex-column align-items-center text-center"
-            style="border-radius: 2em">
-                {{ form_row(registrationForm.email) }}
-            <div>
-                {{ form_row(registrationForm.first_name, {
-                label: 'Prénom'
-                }) }}
-            </div>
-            <div>
-                {{ form_row(registrationForm.last_name, {
-                label: "Nom"
-                }) }}
-            </div>
-            <div>
-                {{ form_row(registrationForm.phone_number , {
-                label: "Numéro de téléphone"
-                }) }}
-            </div>
-            <div>
-                {{ form_row(registrationForm.address , {
-                label: "Adresse"
-                }) }}
-            </div>
-            <br><br>
-            <div>
-                {{ form_row(registrationForm.save , {
-                label: "Ajouter"
-                }) }}
-            </div>
-        </div>
-        {{ form_end(registrationForm) }}
-    </div>
-    <div class="col-4 align-items-center">
-        <img class="my-2" src="{{ asset('../public/images/woman-pencil.png') }}" id="form_image"
-            alt="image du login" />
-    </div>
-</div>
-</main>
-</div>
+{% block main %}
+	{{ parent() }}
+	<main class="col-10 p-0 m-0 ">
+		<section class="px-5 book-list">
+			<div class="row d-flex align-items-center justify-content-center">
+				<h1 style="text-align: center; border-bottom: 2px solid #3dc7b9;" class="pb-3">Ajout d'un utilisateur</h1>
+				<div class="col-6 me-5">
+					<figure>
+						<img src="{{ asset('../public/images/sexy-woman.png') }}" alt="dessin pour le formulaire d'ajout d'un utilisateur"  id="adduserImg">
+					</figure>
+					{{ form_start(registrationForm) }}
+					<div class="col form-control form-control-lg border-yellow p-5 my-5 d-flex flex-column align-items-center text-center"
+						style="border-radius: 2em">
+							{{ form_row(registrationForm.email) }}
+						<div>
+							{{ form_row(registrationForm.first_name, {
+							label: 'Prénom'
+							}) }}
+						</div>
+						<div>
+							{{ form_row(registrationForm.last_name, {
+							label: "Nom"
+							}) }}
+						</div>
+						<div>
+							{{ form_row(registrationForm.phone_number , {
+							label: "Numéro de téléphone"
+							}) }}
+						</div>
+						<div>
+							{{ form_row(registrationForm.address , {
+							label: "Adresse"
+							}) }}
+						</div>
+						<br><br>
+						<div>
+							{{ form_row(registrationForm.save , {
+							label: "Ajouter"
+							}) }}
+						</div>
+					</div>
+					{{ form_end(registrationForm) }}
+				</div>
+				<div class="col-4 align-items-center">
+					<img class="my-2" src="{{ asset('../public/images/woman-pencil.png') }}" id="form_image"
+						alt="image du login" />
+				</div>
+			</div>
+		</section>
+		{% include 'footer.php' %}
+	</main>
 {% endblock %}

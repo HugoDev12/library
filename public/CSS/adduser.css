@@ -1,5 +1,45 @@
-#separateur{
-width: 700px;
-height: 10em;
-margin: 5em;
+/* #separateur{
+	width: 700px;
+	height: 10em;
+	margin: 5em;
 }
+
+.example-wrapper {
+	margin: 1em auto;
+	max-width: 800px;
+	width: 95%;
+	font: 18px/1.5 sans-serif;
+}
+
+.example-wrapper code {
+	background: #F5F5F5;
+}
+
+#adduserImg {
+	position: relative;
+	left: 0;
+	top: 9rem;
+}
+
+#form_image {
+	width: 28em;
+
+} */
+
+.form-control-lg {
+    min-height: calc(1em + 0.75rem + 2px);
+    padding: 0.5rem 1rem;
+    font-size: 1.0rem;
+    border-radius: 0.3rem;
+}
+
+#register_form{
+margin-left:-5em;
+}
+
+.my-4 {
+	margin-top: 0.75rem!important;
+	margin-bottom: 0.5!important;
+}
+
+

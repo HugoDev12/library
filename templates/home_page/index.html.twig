@@ -1,184 +1,161 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Les Livres
-
+	Les Livres
 {% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="{{ asset('../public/CSS/homepage.css')}}">
+	{{ parent() }}
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="{{ asset('../public/CSS/homepage.css')}}">
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('#books').DataTable({
-			pageLength: 5,
-			language: {
-				processing: "Traitement en cours...",
-				search: "Rechercher&nbsp;:",
-				lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
-				info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-				infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-				infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-				infoPostFix: "",
-				loadingRecords: "Chargement en cours...",
-				zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
-				emptyTable: "Aucune donnée disponible dans le tableau",
-				paginate: {
-					first: "Premier",
-					previous: "Pr&eacute;c&eacute;dent",
-					next: "Suivant",
-					last: "Dernier"
-				},
-				aria: {
-					sortAscending: ": activer pour trier la colonne par ordre croissant",
-					sortDescending: ": activer pour trier la colonne par ordre décroissant"
-				}
-			}
-		});
-	});
-</script>
-{% endblock %}
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('#books').DataTable({
+					pageLength: 5,
+					language: {
+						processing: "Traitement en cours...",
+						search: "Rechercher&nbsp;:",
+						lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+						info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+						infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+						infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+						infoPostFix: "",
+						loadingRecords: "Chargement en cours...",
+						zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+						emptyTable: "Aucune donnée disponible dans le tableau",
+						paginate: {
+							first: "Premier",
+							previous: "Pr&eacute;c&eacute;dent",
+							next: "Suivant",
+							last: "Dernier"
+						},
+						aria: {
+							sortAscending: ": activer pour trier la colonne par ordre croissant",
+							sortDescending: ": activer pour trier la colonne par ordre décroissant"
+						}
+					}
+				});
+			});
+		</script>
+	{% endblock %}
 
-{% block body %}
-{{ parent() }}
-{% for message in app.flashes('success') %}
-<div class="alert alert-success">
-	{{ message }}
-</div>
-{% endfor %}
-{# {% for message in app.flashes('danger') %}
-<div class="alert alert-danger">
-	{{ message }}
-</div>
-{% endfor %} #}
-<style>
-	.book-list {
-		margin: auto auto;
-		width: 100%;
-		font: 18px / 1.5 sans-serif;
-	}
-	.book-list code {
-		background: #F5F5F5;
-		padding: 2px 6px;
-	}
-</style>
+{% block main %}
+	{# {{ parent() }} #}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('danger') %}
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+	<p>Email : {{ app.user.email }}</p>
+	<p>Nom : {{ app.user.firstname }} {{ app.user.lastname }}</p>
+	{% if app.user.getImageName() %}
+	<img class="w-25" src='/todolist/avatar/{{app.user.getImageName()}}'> <br>
+	{% endif %}
+	{% endif %} #}
+<main class="col-10 p-0 m-0 ">
+	<section class="px-5 book-list">
+		<div class="text-align-center mx-5 mt-5 mb-3">
+			<h1>Les Livres</h1>
+		</div>
+		<table id="books" class="table responsive">
+			<thead class="table-yellow" >
+				<tr>
+					<th scope="col">
+						Image
+					</th>
+					<th scope="col">
+						Titre
+					</th>
+					<th scope="col">
+						Auteur
+					</th>
+					<th scope="col">
+						Disponibilité
+					</th>
+					<th scope="col">
+						Emprunteur
+					</th>
+					<th scope="col">
+						Catégorie
 
-{# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-<p>Email : {{ app.user.email }}</p>
-<p>Nom : {{ app.user.firstname }} {{ app.user.lastname }}</p>
-{% if app.user.getImageName() %}
-<img class="w-25" src='/todolist/avatar/{{app.user.getImageName()}}'> <br>
-{% endif %}
-{% endif %} #}
+					</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
 
-{% for message in app.flashes('success') %}
-<div class="alert alert-success">
-	{{ message }}
-</div>
-{% endfor %}
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					{% for book in books %}
+					<th scope="row">
+					<img src="{{ book.getImageName() }}" class="book_img"></img>
+					</th>
+					<td>
+						{{ book.getTitle() }}
+					</td>
+					<td>
+						{{ book.getAuthor() }}
+					</td>
+					<td>
+						{% if book.getStatus() %}
+						Disponible
+						{% else %}
+						Indisponible
+						{% endif %}
+					</td>
+					<td>
+						{% if (book.getlastUser() != null) %}
+						{{ book.getLastUser().getLastName() }}
+						{% else %}
+						Aucun
+						{% endif %}
+					</td>
 
-<div class="book-list">
+					<td>
+						{{ book.getCategory() }}
+					</td>
 
-	<div class="text-align-center mx-5 mt-5 mb-3">
-		<h1>Les Livres</h1>
-	</div>
+					<td>
+						<a href="home/detail/{{ book.getId() }}" class="btn btn-warning">
+							Détail
+						</a>
+						{# <a href="{{ path('book_edit'), {book.getId()}}}" class="btn btn-warning">
+							Détail
+						</a> #}
+					</td>
 
+					
 
+					<td>
+						{% if (book.getlastUser() != null) %}
+						<a href="home/return/{{ book.getId() }}" class="btn btn-yellow">
+							Rendu
+						</a>
+						{% endif %}
 
-	<table id="books" class="table responsive">
-		<thead class="table-yellow" >
-			<tr>
-				<th scope="col">
-					Image
-				</th>
-				<th scope="col">
-					Titre
-				</th>
-				<th scope="col">
-					Auteur
-				</th>
-				<th scope="col">
-					Disponibilité
-				</th>
-				<th scope="col">
-					Emprunteur
-				</th>
-				<th scope="col">
-					Catégorie
+					</td>
 
-				</th>
-				<th scope="col"></th>
-				<th scope="col"></th>
-
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				{% for book in books %}
-				<th scope="row">
-				<img src="{{ book.getImageName() }}" class="book_img"></img>
-				</th>
-				<td>
-					{{ book.getTitle() }}
-				</td>
-				<td>
-					{{ book.getAuthor() }}
-				</td>
-				<td>
-					{% if book.getStatus() %}
-					Disponible
-					{% else %}
-					Indisponible
-					{% endif %}
-				</td>
-				<td>
-					{% if (book.getlastUser() != null) %}
-					{{ book.getLastUser().getLastName() }}
-					{% else %}
-					Aucun
-					{% endif %}
-				</td>
-
-				<td>
-					{{ book.getCategory() }}
-				</td>
-
-				<td>
-					<a href="home/detail/{{ book.getId() }}" class="btn btn-warning">
-						Détail
-					</a>
-					{# <a href="{{ path('book_edit'), {book.getId()}}}" class="btn btn-warning">
-						Détail
-					</a> #}
-				</td>
-
-				
-
-				<td>
-					{% if (book.getlastUser() != null) %}
-					<a href="home/return/{{ book.getId() }}" class="btn btn-yellow">
-						Rendu
-					</a>
-					{% endif %}
-
-				</td>
-
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-	<div class="my-3" id="button_livres">
-	<a href="{{ path('book_create') }}" class="btn btn-yellow" id="button_livres">
-		Ajouter un livre
-	</a>
-</div>
-
-</div>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="my-3" id="button_livres">
+			<a href="{{ path('book_create') }}" class="btn btn-yellow" id="button_livres">
+				Ajouter un livre
+			</a>
+		</div>
+	</section>
+	{% include 'footer.php' %}
 </main>
-</div>
 {% endblock %}
