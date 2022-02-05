@@ -6,54 +6,45 @@
 {% endblock %}
 
 {% block stylesheets %}
+	{{ parent() }}
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-	<style>
-		.example-wrapper {
-			max-width: 500px;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ asset('../public/CSS/user.css')}}">
 {% endblock %}
 
 {% block javascripts %}
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript">
-
 		$(document).ready(function () {
-$('#users').DataTable({
-language: {
-processing: "Traitement en cours...",
-search: "Rechercher&nbsp;:",
-lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
-info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-infoPostFix: "",
-loadingRecords: "Chargement en cours...",
-zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
-emptyTable: "Aucune donnée disponible dans le tableau",
-paginate: {
-first: "Premier",
-previous: "Pr&eacute;c&eacute;dent",
-next: "Suivant",
-last: "Dernier"
-},
-aria: {
-sortAscending: ": activer pour trier la colonne par ordre croissant",
-sortDescending: ": activer pour trier la colonne par ordre décroissant"
-}
-}
-});
-});
+			$('#users').DataTable({
+				language: {
+					processing: "Traitement en cours...",
+					search: "Rechercher&nbsp;:",
+					lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+					info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+					infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+					infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+					infoPostFix: "",
+					loadingRecords: "Chargement en cours...",
+					zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+					emptyTable: "Aucune donnée disponible dans le tableau",
+					paginate: {
+						first: "Premier",
+						previous: "Pr&eacute;c&eacute;dent",
+						next: "Suivant",
+						last: "Dernier"
+					},
+					aria: {
+						sortAscending: ": activer pour trier la colonne par ordre croissant",
+						sortDescending: ": activer pour trier la colonne par ordre décroissant"
+					}
+				}
+			});
+		});
 	</script>
 {% endblock %}
 
-{% block body %}
+{% block main %}
 	{# {% for message in app.flashes('success') %}
 						            <div class="alert alert-success">
 						                {{ message }}
@@ -84,85 +75,89 @@ sortDescending: ": activer pour trier la colonne par ordre décroissant"
 						    <img class="w-25" src='/todolist/avatar/{{app.user.getImageName()}}'> <br>
 						    {% endif %}
 						    {% endif %} #}
-
+	{# {{ parent() }} #}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
 	{% for message in app.flashes('danger') %}
-	<div class="alert alert-danger">
-		{{ message }}
-	</div>
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
 	{% endfor %}
 
-	{{ parent() }}
+	<main class="col-10 p-0 m-0 ">
+		<section class="px-5 book-list">
+			<div class="example-wrapper">
+				<div class="text-align-center mx-5 mt-5 mb-3">
+					<h1>Les utilisateurs</h1>
+				</div>
+				<table id="users" class="table">
+					<thead>
+						<tr>
+							<th scope="col">
+								Prénom
+							</th>
+							<th scope="col">
+								Nom
+							</th>
+							<th scope="col">
+								Numéro de téléphone
+							</th>
+							<th scope="col">
+								Adresse
+							</th>
+							<th scope="col">
+								Email
 
+							</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
 
-	<div class="example-wrapper d-flex">
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							{% for user in users %}
+								<th scope="row">
+									{{ user.getFirstName() }}
+								</th>
+								<td>
+									{{ user.getLastName() }}
+								</td>
+								<td>
+									{{ user.getPhoneNumber() }}
+								</td>
+								<td>
+									{{ user.getAddress() }}
 
-		<h1>
-			Les utilisateurs
-		</h1>
-		<a href="{{ path('user_register') }}">
-			Ajouter un utlisateur
-		</a>
+								</td>
+								<td>
+									{{ user.getEmail() }}
+								</td>
 
-		<table id="users" class="table">
-			<thead>
-				<tr>
-					<th scope="col">
-						Prénom
-					</th>
-					<th scope="col">
-						Nom
-					</th>
-					<th scope="col">
-						Numéro de téléphone
-					</th>
-					<th scope="col">
-						Adresse
-					</th>
-					<th scope="col">
-						Email
+								<td>
+									<a href="user/detail/{{ user.getId() }}" class="btn btn-warning">
+										Detail
+									</a>
+								</td>
 
-					</th>
-					<th scope="col"></th>
-					<th scope="col"></th>
+								<td>
+									<a href="user/delete/{{ user.getId() }}" class="btn btn-danger">
+										Supprimer
+									</a>
+								</td>
 
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					{% for user in users %}
-						<th scope="row">
-							{{ user.getFirstName() }}
-						</th>
-						<td>
-							{{ user.getLastName() }}
-						</td>
-						<td>
-							{{ user.getPhoneNumber() }}
-						</td>
-						<td>
-							{{ user.getAddress() }}
-
-						</td>
-						<td>
-							{{ user.getEmail() }}
-						</td>
-
-						<td>
-							<a href="user/detail/{{ user.getId() }}" class="btn btn-warning">
-								Detail
-							</a>
-						</td>
-
-						<td>
-							<a href="user/delete/{{ user.getId() }}" class="btn btn-danger">
-								Supprimer
-							</a>
-						</td>
-
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-
-	</div>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<a class="btn btn-yellow" href="{{ path('user_register') }}">
+					Ajouter un utlisateur
+				</a>
+			</div>
+		</section>
+		{% include 'footer.php' %}
+	</main>
 {% endblock %}

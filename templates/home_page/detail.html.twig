@@ -4,105 +4,84 @@
 	Détail du livre
 {% endblock %}
 
-
 {% block stylesheets %}
-	<link rel="stylesheet" href="../../CSS/main.css">
-	<link rel="stylesheet" href="../../CSS/book_detail.css">
-	<style>
-		main {
-			position: relative;
-			left: 25vw !important;
-		}
-	</style>
-
+	{{ parent() }}
+	{# <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"> #}
+	<link rel="stylesheet" href="{{ asset('../public/CSS/main.css')}}">
+	<link rel="stylesheet" href="{{ asset('../public/CSS/book_detail.css')}}">
 {% endblock %}
 
-{% block body %}
-
+{% block main %}
 	{{ parent() }}
-	<br>
-	{# <main class="mt-1 pt-4"> #}
-		<div
-			class="container dark-grey-text">
-
-			<!--Grid row-->
-			<div
-				class="row wow fadeIn">
-				<!--Grid column-->
-				<div class="col-md-3 my-4 mx-3 text-center">
-					<img src="{{ book.getImageName() }}" class="img-fluid book-img" alt="book"></img>
-
-			</div>
-			<!--Grid column-->
-
-			<!--Grid column-->
-			<div
-				class="col-md-6 mb-4">
-
-				<!--Content-->
-
-				<div class="p-2">
-					<p class="lead">
-						<div class="mb-3">
-							<h3>{{ book.getTitle() }}</h3>
-						</div>
-						<span>{{ book.getAuthor() }}</span>
-					</p>
-					<p>Publié le
-						{{ book.getDate()|date("d/m/Y") }}
-						/ Maison d'édition :
-						{{ book.getPublisher() }}</p>
-					<p>Catégorie :
-						{{ book.getCategory() }}</p>
-
-					<p class="lead font-weight-bold">Résumé</p>
-
-					<p>{{ book.getDescription() }}</p>
-
-					{% if book.getStatus() %}
-						<div class="alert alert-success text-center" role="alert">Disponible</div>
-					{% else %}
-						<div class="alert alert-danger text-center" role="alert">Indisponible</div>
-					{% endif %}
-					{% if book.getLastUser() %}
-						<hr>
-						<div
-							class="row d-flex wow fadeIn">
-
-							<!--Grid column-->
-							<div class="col-md-12">
-
-								<h4 class="my-4 h4">Emprunteur :</h4>
-								<li>Prénom :
-									{{ book.getLastUser().getFirstName() }}</li>
-								<li>Nom :
-									{{ book.getLastUser().getLastName() }}</li>
-								<li>Identifiant :
-									{{ book.getLastUser().getId() }}</li>
-
-								<li>Date d'emprunt :
-									{{ book.getLoanDate()|date("d/m/Y") }}</li>
-
-								<li>Date de retour :
-									{{ book.getDueDate()|date("d/m/Y") }}</li>
-							</div>
-
-							<!--Content-->
-						</div>
-					{% endif %}
-					<div class="my-5">
-						<a href="../edit/{{ book.getId() }}" class="btn btn-warning">
-							Modifier le livre
-						</a>
-					</div>
-
-					<!--Grid column-->
-				</div>
+	<main class="col-10 p-0 m-0 ">
+		<section class="px-5 book-list">
+			<div class="container mt-5 dark-grey-text">
 				<!--Grid row-->
+				<div class="row wow fadeIn">
+					<!--Grid column-->
+					<div class="col-md-3 my-4 mx-3 text-center">
+						<img src="{{ book.getImageName() }}" class="img-fluid book-img" alt="book"></img>
+					</div>
+				<!--Grid column-->
+				<div class="col-md-6 mb-4">
+					<!--Content-->
+					<div class="p-2">
+						<p class="lead">
+							<div class="mb-3">
+								<h3>{{ book.getTitle() }}</h3>
+							</div>
+							<span>{{ book.getAuthor() }}</span>
+						</p>
+						<p>Publié le
+							{{ book.getDate()|date("d/m/Y") }}
+							/ Maison d'édition :
+							{{ book.getPublisher() }}</p>
+						<p>Catégorie :
+							{{ book.getCategory() }}</p>
+
+						<p class="lead font-weight-bold">Résumé</p>
+
+						<p>{{ book.getDescription() }}</p>
+
+						{% if book.getStatus() %}
+							<div class="alert alert-success text-center" role="alert">Disponible</div>
+						{% else %}
+							<div class="alert alert-danger text-center" role="alert">Indisponible</div>
+						{% endif %}
+						{% if book.getLastUser() %}
+							<hr>
+							<div class="row d-flex wow fadeIn">
+								<!--Grid column-->
+								<div class="col-md-12">
+									<h4 class="my-4 h4">Emprunteur :</h4>
+									<li>Prénom :
+										{{ book.getLastUser().getFirstName() }}</li>
+									<li>Nom :
+										{{ book.getLastUser().getLastName() }}</li>
+									<li>Identifiant :
+										{{ book.getLastUser().getId() }}</li>
+
+									<li>Date d'emprunt :
+										{{ book.getLoanDate()|date("d/m/Y") }}</li>
+
+									<li>Date de retour :
+										{{ book.getDueDate()|date("d/m/Y") }}</li>
+								</div>
+								<!--Content-->
+							</div>
+						{% endif %}
+						<div class="my-5">
+							<a href="../edit/{{ book.getId() }}" class="btn btn-warning">
+								Modifier le livre
+							</a>
+						</div>
+						<!--Grid column-->
+					</div>
+					<!--Grid row-->
+				</div>
+				<!--Grid column-->
 			</div>
-			<!--Grid column-->
-
-		</div>
-
-
-	{% endblock %}
+		</section>
+		{% include 'footer.php' %}
+	</main>
+{% endblock %}
