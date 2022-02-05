@@ -16,9 +16,12 @@
 	<main class="col-10 p-0 m-0 ">
 		<section class="px-5 book-list">
 			<div class="row d-flex align-items-center justify-content-center">
-				<h1 style="text-align: center; border-bottom: 2px solid #3dc7b9;" class="pb-3">Ajout d'un utilisateur</h1>
+				<div class="align-items-center mt-5">
+						<h1>Ajout d'un utilisateur</h1>
+					</div>
+					<div class="separateur bg-green mb-2"></div>
 				<div class="col-6 me-5">
-					<figure>
+					<figure style="position: relative;">
 						<img src="{{ asset('../public/images/sexy-woman.png') }}" alt="dessin pour le formulaire d'ajout d'un utilisateur"  id="adduserImg">
 					</figure>
 					{{ form_start(registrationForm) }}
@@ -55,7 +58,7 @@
 					{{ form_end(registrationForm) }}
 				</div>
 				<div class="col-4 align-items-center">
-					<img class="my-2" src="{{ asset('../public/images/woman-pencil.png') }}" id="form_image"
+					<img class="my-2 img-fluid" src="{{ asset('../public/images/woman-pencil.png') }}" id="form_image"
 						alt="image du login" />
 				</div>
 			</div>
