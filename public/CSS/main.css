@@ -21,7 +21,7 @@ border: solid 2px var(--yellow);
 }
 .btn-yellow:hover {
     color: var(--yellow) !important;
-    background-color: var(--white) !important;
+    background-color: var(--white);
     border-color: var(--yellow) !important;
 }
 
@@ -71,7 +71,7 @@ border: solid 2px var(--green);
 }
 .btn-green:hover {
     color: var(--green);
-    background-color: var(--white);
+    background-color: #fff;
     border-color: var(--green);
 }
 
