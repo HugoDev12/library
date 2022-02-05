@@ -93,6 +93,13 @@ font-size: 2em;
 }
 
 
+h3 {
+color: #07085b;
+text-align: center;
+font-size: 1.4em;
+}
+
+
 #logo {
     /* width: 20rem; */
 }
