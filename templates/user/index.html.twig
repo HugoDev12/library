@@ -93,6 +93,7 @@
 				<div class="text-align-center mx-5 mt-5 mb-3">
 					<h1>Les utilisateurs</h1>
 				</div>
+				<div class="separateur bg-green mb-5"></div>
 				<table id="users" class="table">
 					<thead>
 						<tr>
@@ -153,9 +154,12 @@
 						{% endfor %}
 					</tbody>
 				</table>
-				<a class="btn btn-yellow" href="{{ path('user_register') }}">
-					Ajouter un utlisateur
-				</a>
+				<div class="my-3" id="button_users">
+					<a class="btn btn-yellow" href="{{ path('user_register') }}">
+						Ajouter un utlisateur
+					</a>
+				</div>
+		</div>
 			</div>
 		</section>
 		{% include 'footer.php' %}

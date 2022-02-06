@@ -7,3 +7,15 @@
 	background: #F5F5F5;
 	padding: 2px 6px;
 }
+
+#users_wrapper{
+width: 80%;
+margin: 3em auto;
+text-align: center !important;
+justify-content: center !important;
+}
+
+#button_users{
+justify-content:center !important;
+text-align: center !important;
+}
