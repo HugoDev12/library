@@ -85,7 +85,7 @@ class UserController extends AbstractController
         ->add('last_name', TextType::class, ["attr" => ["class" => "form-control"]])
         ->add('phone_number', TextType::class, ["attr" => ["class" => "form-control"]])
         ->add('address', TextType::class, ["attr" => ["class" => "form-control"]])
-        ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-primary"]])
+        ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-green"]])
         ->getForm();
 
         $form->handleRequest($request);

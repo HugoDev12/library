@@ -1,0 +1,40 @@
+.separateur{
+height:0.3em;
+width:70%;
+justify-content: center;
+margin: auto;
+}
+.example-wrapper {
+	margin: 1em auto;
+	max-width: 800px;
+	width: 95%;
+	font: 18px / 1.5 sans-serif;
+}
+
+.example-wrapper code {
+	background: #F5F5F5;
+	padding: 2px 6px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    line-height: 1.5;
+    color: #07085b;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: solid 3px #feb546;
+    border-radius: 0.7rem;
+}
+
+#wrapper_book{
+border: solid 3px #feb546;
+border-radius: 1rem;
+margin-bottom: 2em;
+}
+
+#form_title, #form_author, #form_description, #form_publisher, #form_category, #form_last_user, #form_save, #form__token{
+margin-bottom: 2em;
+margin-top: 0.5em;
+}
