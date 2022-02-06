@@ -47,16 +47,6 @@
 
 {% block main %}
 	{# {{ parent() }} #}
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">
-			{{ message }}
-		</div>
-	{% endfor %}
-	{% for message in app.flashes('danger') %}
-		<div class="alert alert-danger">
-			{{ message }}
-		</div>
-	{% endfor %}
 	{# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 	<p>Email : {{ app.user.email }}</p>
 	<p>Nom : {{ app.user.firstname }} {{ app.user.lastname }}</p>
@@ -67,6 +57,16 @@
 <main class="col-10 p-0 m-0 ">
 	<section class="px-5 book-list">
 		<div class="text-align-center mx-5 mt-5 mb-3">
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('danger') %}
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
+	{% endfor %}
 			<h1>Les Livres</h1>
 		</div>
 		<div class="separateur bg-green mb-5"></div>
