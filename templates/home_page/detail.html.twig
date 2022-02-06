@@ -9,6 +9,11 @@
 	{# <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"> #}
 	<link rel="stylesheet" href="{{ asset('../public/CSS/main.css')}}">
 	<link rel="stylesheet" href="{{ asset('../public/CSS/book_detail.css')}}">
+	<style>
+		main {
+			top: 10vh;
+		}
+	</style>
 {% endblock %}
 
 {% block main %}
@@ -82,6 +87,8 @@
 				<!--Grid column-->
 			</div>
 		</section>
-		{% include 'footer.php' %}
 	</main>
+{% endblock %}
+{% block footer %}
+{{ parent()}}
 {% endblock %}

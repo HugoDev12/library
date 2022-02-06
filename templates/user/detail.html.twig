@@ -9,6 +9,11 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="{{ asset('../public/CSS/main.css')}}">
 	<link rel="stylesheet" href="{{ asset('../public/CSS/adduser.css')}}">
+	<style>
+		main {
+			top: 5vh;
+		}
+	</style>
 {% endblock %}
 
 {% block main %}
@@ -33,14 +38,16 @@
 
 
 				<h3>Livres empruntés :</h3>
-				<ul>
+				<ul style="list-style: none;" class="d-flex align-items-center flex-column"><br>
 					{% for history in user.getUserHistory() %}
 						{% for book in history.getBook() %}
 
-						<p>{{ book.getTitle() }}</p>
+						<li class="list-group-item">{{ book.getTitle() }}</li>
 						{% endfor %}
 						{% if history.getBook is not null %}
-							<p>{{history.getBook.getTitle()}} Date d'emprunt : {{history.getBook.getLoanDate|date("d/m/Y")}} Date de rendu : {{history.getBook.getDueDate|date("d/m/Y")}}</p>
+							<li><strong>Titre : </strong>{{history.getBook.getTitle()}}</li><br>
+							<li><strong>Date d'emprunt : </strong>{{history.getBook.getLoanDate|date("d/m/Y")}}</li><br>
+							<li><strong> Date de rendu : </strong>{{history.getBook.getDueDate|date("d/m/Y")}}</li><br>
 						{% endif %}
 						{# <td>{{history.getBook.getAuthor()}}</td> #}
 					{% endfor %}
@@ -51,6 +58,8 @@
 					</a>
 				</div>
 		</section>
-		{% include 'footer.php' %}
 	</main>
+{% endblock %}
+{% block footer %}
+{{ parent()}}
 {% endblock %}
