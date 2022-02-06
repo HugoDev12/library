@@ -4,12 +4,6 @@
 	Les Livres
 {% endblock %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-	<link rel="stylesheet" href="{{ asset('../public/CSS/homepage.css')}}">
-{% endblock %}
-
 {% block javascripts %}
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -44,18 +38,15 @@
 		</script>
 	{% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="{{ asset('../public/CSS/homepage.css')}}">
+{% endblock %}
+
+
 {% block main %}
 	{# {{ parent() }} #}
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">
-			{{ message }}
-		</div>
-	{% endfor %}
-	{% for message in app.flashes('danger') %}
-		<div class="alert alert-danger">
-			{{ message }}
-		</div>
-	{% endfor %}
 	{# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 	<p>Email : {{ app.user.email }}</p>
 	<p>Nom : {{ app.user.firstname }} {{ app.user.lastname }}</p>
@@ -66,8 +57,19 @@
 <main class="col-10 p-0 m-0 ">
 	<section class="px-5 book-list">
 		<div class="text-align-center mx-5 mt-5 mb-3">
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('danger') %}
+		<div class="alert alert-danger">
+			{{ message }}
+		</div>
+	{% endfor %}
 			<h1>Les Livres</h1>
 		</div>
+		<div class="separateur bg-green mb-5"></div>
 		<table id="books" class="table responsive">
 			<thead class="table-yellow" >
 				<tr>
@@ -139,7 +141,7 @@
 
 					<td>
 						{% if (book.getlastUser() != null) %}
-						<a href="home/return/{{ book.getId() }}" class="btn btn-yellow">
+						<a href="home/return/{{ book.getId() }}" class="btn btn-green">
 							Rendu
 						</a>
 						{% endif %}

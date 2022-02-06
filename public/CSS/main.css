@@ -157,43 +157,45 @@ margin-bottom:2.5em;
 #books_wrapper{
 width: 80%;
 /* margin-left:11em; */
-margin-top: 3em;
+margin: 3em auto;
+text-align: center !important;
+justify-content: center !important;
 }
 
 table.dataTable thead .sorting {
-background-image:none;
+background-image:none !important;
 }
 
 
 tbody, td, tfoot, th, thead, tr {
- border: none
+ border: none !important;
 }
 
 table.dataTable thead th, table.dataTable thead td {
-padding: 10px 18px;
-border-bottom: solid 3px var(--green);
+padding: 10px 18px !important;
+border-bottom: solid 3px var(--green) !important;
 }
 
 .dataTables_wrapper .dataTables_length select {
-    border: solid 2px var(--red);
-    border-radius: 3px;
-    padding: 5px;
-    background-color: transparent;
-    padding: 4px;
+    border: solid 2px var(--red) !important;
+    border-radius: 3px !important;
+    padding: 5px !important;
+    background-color: transparent !important;
+    padding: 4px !important;
 }
 
 .dataTables_wrapper .dataTables_filter {
-    text-align: center;
+    text-align: center !important;
 }
 
 
 .dataTables_wrapper .dataTables_filter input {
 
-border: solid 2px var(--red);
-border-radius: 3px;
-padding: 5px;
-background-color: transparent;
-margin-left: 3px;
+border: solid 2px var(--red) !important;
+border-radius: 3px !important;
+padding: 5px !important;
+background-color: transparent !important;
+margin-left: 3px !important;
 }
 
 
@@ -202,14 +204,14 @@ width: 4em;
 }
 
 #button_livres{
-justify-content:center;
-text-align: center;
+justify-content:center !important;
+text-align: center !important;
 }
 
 .separateur{
-height:0.2em;
-width:70%;
-justify-content: center;
-margin: 1em auto 8em auto;
+height:0.2em !important;
+width:70% !important;
+justify-content: center !important;
+margin: 1em auto 5em auto !important;
 
 }

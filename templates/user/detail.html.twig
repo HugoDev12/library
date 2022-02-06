@@ -14,36 +14,42 @@
 {% block main %}
 	<main class="col-10 p-0 m-0 ">
 		<section class="px-5 book-list">
-			<div class="container pt-5">
-				<h3>Détails utilisateur :</h3>
+			<div class="container mt-5 dark-grey-text">
+				<h1>Détails utilisateur </h1>
+			<div class="separateur bg-green mb-5"></div>
+			<div class="text-center pb-5">
+				<p><strong>Email : </strong>{{ user.getEmail() }}</p>
 
-				<li>{{ user.getEmail() }}</li>
+				<p><strong>Prénom : </strong>{{ user.getFirstName() }}</p>
 
-				<li>{{ user.getFirstName() }}</li>
+				<p><strong>Nom : </strong>{{ user.getLastName() }}</p>
 
-				<li>{{ user.getLastName() }}</li>
+				<p><strong>Numéro de téléphone : </strong>{{ user.getPhoneNumber() }}</p>
 
-				<li>{{ user.getPhoneNumber() }}</li>
+				<p><strong>Adresse : </strong>{{ user.getAddress() }}</li><br>
+			</div>
 
-				<li>{{ user.getAddress() }}</li><br>
+			<div class="separateur bg-green mb-5"></div>
+
 
 				<h3>Livres empruntés :</h3>
 				<ul>
 					{% for history in user.getUserHistory() %}
 						{% for book in history.getBook() %}
 
-						<li>{{ book.getTitle() }}</li>
+						<p>{{ book.getTitle() }}</p>
 						{% endfor %}
 						{% if history.getBook is not null %}
-							<li>{{history.getBook.getTitle()}} Date d'emprunt : {{history.getBook.getLoanDate|date("d/m/Y")}} Date de rendu : {{history.getBook.getDueDate|date("d/m/Y")}}</li>
+							<p>{{history.getBook.getTitle()}} Date d'emprunt : {{history.getBook.getLoanDate|date("d/m/Y")}} Date de rendu : {{history.getBook.getDueDate|date("d/m/Y")}}</p>
 						{% endif %}
 						{# <td>{{history.getBook.getAuthor()}}</td> #}
 					{% endfor %}
 				</ul>
-				<a href="{{path('user_edit',{id})}}" class="btn btn-red">
-					Modifier l'utilisateur
-				</a>
-			</div>
+				<div class="my-5 text-center">
+					<a href="{{path('user_edit',{id})}}" class="btn btn-red">
+						Modifier l'utilisateur
+					</a>
+				</div>
 		</section>
 		{% include 'footer.php' %}
 	</main>
