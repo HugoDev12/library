@@ -112,6 +112,8 @@ font-size: 1.4em;
 
 nav {
     overflow: hidden;
+    position: fixed;
+    height: 100vh;
     }
     
 .book_img {
@@ -128,6 +130,7 @@ nav {
 
 main {
     position: relative;
+    left: 10vw;
 }
 
 main section{
@@ -135,10 +138,9 @@ margin-bottom: 90px;
 }
 
 footer{
-	position: absolute;
+	position: relative;
     bottom: 0;
-    left: 0;
-    right: 0;
+    z-index: -1;
 }
 
 /* -------------------------------------Livres------------------------------------- */

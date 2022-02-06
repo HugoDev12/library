@@ -18,13 +18,17 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'user')]
     public function index(ManagerRegistry $doctrine): Response
     {
+   
+        
         $entityManager = $doctrine->getManager();
         $users = $entityManager->getRepository(User::class)->findAll();
+        // $qb = $this->createQueryBuilder('u');
 
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',

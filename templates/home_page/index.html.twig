@@ -46,14 +46,6 @@
 
 
 {% block main %}
-	{# {{ parent() }} #}
-	{# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-	<p>Email : {{ app.user.email }}</p>
-	<p>Nom : {{ app.user.firstname }} {{ app.user.lastname }}</p>
-	{% if app.user.getImageName() %}
-	<img class="w-25" src='/todolist/avatar/{{app.user.getImageName()}}'> <br>
-	{% endif %}
-	{% endif %} #}
 <main class="col-10 p-0 m-0 ">
 	<section class="px-5 book-list">
 		<div class="text-align-center mx-5 mt-5 mb-3">
@@ -132,9 +124,6 @@
 						<a href="home/detail/{{ book.getId() }}" class="btn btn-yellow">
 							Détail
 						</a>
-						{# <a href="{{ path('book_edit'), {book.getId()}}}" class="btn btn-warning">
-							Détail
-						</a> #}
 					</td>
 
 					
@@ -158,6 +147,9 @@
 			</a>
 		</div>
 	</section>
-	{% include 'footer.php' %}
 </main>
+{% endblock %}
+
+{% block footer %}
+{{ parent()}}
 {% endblock %}

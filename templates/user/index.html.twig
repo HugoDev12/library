@@ -9,6 +9,12 @@
 	{{ parent() }}
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="{{ asset('../public/CSS/user.css')}}">
+
+	<style>
+		main {
+			left: 15vw;
+		}
+	</style>
 {% endblock %}
 
 {% block javascripts %}
@@ -161,6 +167,8 @@
 				</div>
 			</div>
 		</section>
-		{% include 'footer.php' %}
 	</main>
+{% endblock %}
+{% block footer %}
+{{ parent()}}
 {% endblock %}

@@ -42,7 +42,6 @@ class HomePageController extends AbstractController
         $book = new Books();
         $book->setTitle("Titre du Livre");
         $book->setAuthor("Nom de l'auteur");
-        // $book->setDate(new DateTime("now"));
         $book->setDescription("Résumé");
         $book->setPublisher("Maison d'édition");
         $book->setCategory("Catégorie");
