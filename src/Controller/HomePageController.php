@@ -60,13 +60,16 @@ class HomePageController extends AbstractController
             ->add('description', TextareaType::class, ["attr" => ["class" => "form-control"]])
             ->add('publisher', TextType::class, ["attr" => ["class" => "form-control"]])
             ->add('category', TextType::class, ["attr" => ["class" => "form-control"]])
-            ->add('cover', FileType::class, [
+            ->add('cover', FileType::class, 
+			[
+				"label" => "Ajouter votre couverture",
                 "mapped" => false,
                 "required" => false,
                 "constraints" => [new File([
                     'maxSize' => '1024k',
                     'mimeTypes' => ['image/png', 'image/jpeg'],
                     'mimeTypesMessage' => 'Veuillez choisir une image au format jpeg ou png',])],])
+
             ->add('save', SubmitType::class, ["label" => "Envoyer", "attr" => ["class" => "btn btn-green"]])
             ->getForm();
 

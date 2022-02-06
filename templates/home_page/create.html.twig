@@ -8,6 +8,7 @@
 	{{ parent() }}
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="{{ asset('../public/CSS/main.css')}}">
+	<link rel="stylesheet" href="{{ asset('../public/CSS/create_book.css')}}">
 	<style>
 		.example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
 		.example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -16,9 +17,10 @@
 
 {% block main %}
 <main class="col-10 p-0 m-0 ">
-	<section class="px-5 book-list">
-		<div class="pt-5 example-wrapper">
+	<section class="p-5 book-list">
 			<h1>Ajouter un livre</h1>
+			<div class="separateur bg-green mb-2"></div>
+		<div id="formAddBook" class="pt-5 example-wrapper text-center">
 			{{form(form)}}
 			<!-- <ul>
 				<li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/test-symfony/src/Controller/NomDuControleurController.php'|file_link(0) }}">src/Controller/NomDuControleurController.php</a></code></li>

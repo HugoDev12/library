@@ -1,0 +1,33 @@
+.separateur{
+height:0.3em;
+width:70%;
+justify-content: center;
+margin: auto;
+}
+
+#formAddBook{
+border: solid 3px #feb546;
+width: 80%;
+padding: 2em 3em 0em 3em!important;
+line-height: 1.5;
+color: #07085b;
+border: solid 3px #feb546;
+border-radius: 3rem;
+font-size: 1.2em;
+}
+
+#form_title, #form_author, #form_description, #form_publisher, #form_category{
+margin-bottom: 2em;
+margin-top: 0.5em; 
+border: solid 2px #feb546;
+border-radius: 0.7em;
+}
+
+#form_save, #form__tokenform__token{
+margin-bottom: 2em;
+margin-top: 0.5em;
+}
+
+#form_cover{
+margin: 15px 15px 15px 15px;
+}
