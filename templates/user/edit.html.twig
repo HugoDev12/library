@@ -8,18 +8,7 @@
 	{{ parent() }}
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="{{ asset('../public/CSS/main.css')}}">
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ asset('../public/CSS/modify_user.css')}}">
 {% endblock %}
 
 {% block main %}
@@ -27,7 +16,8 @@
 		<section class="px-5 book-list">
 			<div class="pt-5 example-wrapper">
 				<h1>Modifier un utilisateur</h1>
-
+			<div class="separateur bg-green mb-5"></div>
+			<div id="wrapper_user" class="p-5 text-center">
 				{{ form(form) }}
 
 				<a href="../delete/{{id}}" class="btn btn-red">
