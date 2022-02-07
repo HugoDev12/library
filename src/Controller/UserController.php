@@ -28,7 +28,11 @@ class UserController extends AbstractController
         
         $entityManager = $doctrine->getManager();
         $users = $entityManager->getRepository(User::class)->findAll();
+
+        // $users = $entityManager->getRepository(User::class)->findBy(array('roles'=>'["ROLE_USER"]'));
+        
         // $qb = $this->createQueryBuilder('u');
+        // $users->getUsers('["ROLE_USER"]');
 
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
