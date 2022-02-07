@@ -17,22 +17,26 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
+use App\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     #[Route('/user', name: 'user')]
     public function index(ManagerRegistry $doctrine): Response
     {
    
         
-        $entityManager = $doctrine->getManager();
-        $users = $entityManager->getRepository(User::class)->findAll();
-
-        // $users = $entityManager->getRepository(User::class)->findBy(array('roles'=>'["ROLE_USER"]'));
-        
-        // $qb = $this->createQueryBuilder('u');
-        // $users->getUsers('["ROLE_USER"]');
+        // $entityManager = $doctrine->getManager();
+        // $users = $entityManager->getRepository(User::class)->findAll();
+        $users = $this->userRepository->getUsers(); 
+        // dd($users);
 
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
