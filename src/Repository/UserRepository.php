@@ -65,13 +65,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
 
-    public function getUsers($role): ?User
+    public function getUsers(): ?Array
     {
-        $em = $this->getEntityManager();
-        return $em->createQueryBuilder('u')
-        ->where('u.roles = :roles')
-        ->setParameter('roles', $role)
-        ->getQuery()
-        ->getResult();
+        // $conn = $this->getEntityManager()->getConnection();
+
+        // $sql = '
+        //     SELECT * FROM user u
+        //     WHERE u.roles = :roles
+        //     ';
+        // $stmt = $conn->prepare($sql);
+        // $resultSet = $stmt->executeQuery(['roles' => '["ROLE_USER"]']);
+
+        // // returns an array of arrays (i.e. a raw data set)
+        // return $resultSet->fetchAllAssociative();
+
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.roles = :roles')
+            ->setParameter('roles', '["ROLE_USER"]');
+
+        $query = $qb->getQuery();
+        return $query->execute();
+
     }
 }
